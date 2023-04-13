@@ -218,6 +218,13 @@ public class GameController {
                 if(board.getPlayer(i).getSpace().getConveyor() != null){
                     moveByConveyor(board.getPlayer(i));
                 }
+                if(board.getPlayer(i).getSpace().getGear() != null){
+                    if(board.getPlayer(i).getSpace().getGear().getHeading() == Heading.WEST){
+                        turnLeft(board.getPlayer(i));
+                    }else{
+                        turnRight(board.getPlayer(i));
+                    }
+                }
             }
         }
     }

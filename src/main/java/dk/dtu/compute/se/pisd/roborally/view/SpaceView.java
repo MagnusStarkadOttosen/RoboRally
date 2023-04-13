@@ -22,7 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.model.Conveyor;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
@@ -31,6 +31,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeLineCap;
@@ -105,8 +106,9 @@ public class SpaceView extends StackPane implements ViewObserver {
     public void updateView(Subject subject) {
         if (subject == this.space) {
             this.getChildren().clear();
-            updateConveyor();
-            updateWalls();
+            drawConveyor();
+            drawGear();
+            drawWalls();
             updatePlayer();
         }
     }
@@ -114,7 +116,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     /**
      * Draws the wall icons.
      */
-    private void updateWalls(){
+    private void drawWalls(){
         List<Heading> walls = space.getWalls();
         for (Heading wall : walls) {
             Pane pane = new Pane();
@@ -135,7 +137,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     /**
      * Draws the player icons.
      */
-    private void updateConveyor() {
+    private void drawConveyor() {
         Conveyor conveyor = space.getConveyor();
         if (conveyor != null) {
             Polygon arrow = new Polygon(0.0, 0.0,
@@ -149,6 +151,22 @@ public class SpaceView extends StackPane implements ViewObserver {
 
             arrow.setRotate((90*conveyor.getHeading().ordinal())%360);
             this.getChildren().add(arrow);
+        }
+    }
+
+    private void drawGear(){
+        Gear gear = space.getGear();
+        if (gear != null) {
+            Circle circle = new Circle(SPACE_WIDTH/2-5);
+
+            circle.setStrokeWidth(5);
+            if(gear.getHeading()==Heading.WEST){
+                circle.setStroke(Color.GRAY);
+            }else{
+                circle.setStroke(Color.GREEN);
+            }
+
+            this.getChildren().add(circle);
         }
     }
 }

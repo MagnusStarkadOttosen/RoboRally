@@ -45,6 +45,8 @@ public class Space extends Subject {
 
     private Conveyor conveyor;
 
+    private Gear gear;
+
     public Space(Board board, int x, int y) {
         this.board = board;
         this.x = x;
@@ -52,6 +54,7 @@ public class Space extends Subject {
         player = null;
         walls = new ArrayList<>();
         conveyor = null;
+        gear = null;
     }
 
     /**
@@ -118,5 +121,21 @@ public class Space extends Subject {
      */
     public Conveyor getConveyor(){
         return conveyor;
+    }
+
+    /**
+     * Adds a gear to the space.
+     * @param heading If WEST rotate player anti-clockwise, if EAST rotate clockwise.
+     */
+    public void addGear(Heading heading){
+        gear = new Gear(heading);
+    }
+
+    /**
+     * Returns the space's gear. If any.
+     * @return conveyor
+     */
+    public Gear getGear(){
+        return gear;
     }
 }
