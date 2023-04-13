@@ -262,9 +262,9 @@ public class GameController {
                 //     is another player on the target. Eventually, this needs to be
                 //     implemented in a way so that other players are pushed away!
                 if(target.getPlayer() != null){
-                    pushPlayer(player.getHeading(), target);
+                    pushPlayer(heading, target);
                 }
-                if(target.getPlayer() == null){
+                if(target.getPlayer() == null && !isBlockedByWall(heading, space)){
                     target.setPlayer(player);
                 }
 
@@ -272,13 +272,25 @@ public class GameController {
         }
     }
 
-    public void pushPlayer(Heading heading, Space target){
-        if(board.getNeighbour(target, heading).getPlayer() != null){
-            pushPlayer(heading, board.getNeighbour(target, heading));
+    public void pushPlayer(Heading heading, Space space){
+        if(board.getNeighbour(space, heading).getPlayer() != null){
+            pushPlayer(heading, board.getNeighbour(space, heading));
         }
-        if(board.getNeighbour(target, heading).getPlayer() == null){
-            board.getNeighbour(target, heading).setPlayer(target.getPlayer());
+        if(board.getNeighbour(space, heading).getPlayer() == null && !isBlockedByWall(heading, space)){
+            board.getNeighbour(space, heading).setPlayer(space.getPlayer());
         }
+    }
+
+    public boolean isBlockedByWall(Heading heading, Space space){
+        if(space.getWalls().contains((heading))){
+            System.out.println("Wall it start space");
+            return true;
+        }
+        if(board.getNeighbour(space, heading).getWalls().contains(heading.next().next())){
+            System.out.println("Wall at target");
+            return true;
+        }
+        return false;
     }
 
     // TODO: V2
