@@ -43,12 +43,15 @@ public class Space extends Subject {
 
     private List<Heading> walls;
 
+    private Conveyor conveyor;
+
     public Space(Board board, int x, int y) {
         this.board = board;
         this.x = x;
         this.y = y;
         player = null;
         walls = new ArrayList<>();
+        conveyor = null;
     }
 
     /**
@@ -94,10 +97,26 @@ public class Space extends Subject {
     }
 
     /**
-     * Returns a list of the sapce's walls.
+     * Returns a list of the space's walls.
      * @return walls
      */
     public List<Heading> getWalls(){
         return walls;
+    }
+
+    /**
+     * Adds a conveyor to the space.
+     * @param heading The direction the wall is blocking.
+     */
+    public void addConveyor(Heading heading){
+        conveyor = new Conveyor(heading);
+    }
+
+    /**
+     * Returns the space's conveyors. If any.
+     * @return conveyor
+     */
+    public Conveyor getConveyor(){
+        return conveyor;
     }
 }

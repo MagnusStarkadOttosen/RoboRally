@@ -193,6 +193,7 @@ public class GameController {
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
                 } else {
                     step++;
+                    actionField(step);
                     if (step < Player.NO_REGISTERS) {
                         makeProgramFieldsVisible(step);
                         board.setStep(step);
@@ -208,6 +209,23 @@ public class GameController {
         } else {
             // this should not happen
             assert false;
+        }
+    }
+
+    public void actionField(int step){
+        if (step >= Player.NO_REGISTERS) { //Runs after all players have moved.
+            for (int i = 0; i < board.getPlayersNumber(); i++) {
+                if(board.getPlayer(i).getSpace().getConveyor() != null){
+                    moveByConveyor(board.getPlayer(i));
+                }
+            }
+        }
+    }
+
+    public void moveByConveyor(Player player){
+        board.getNeighbour(player.getSpace(), player.getSpace().getConveyor().getHeading()).setPlayer(player);
+        if(player.getSpace().getConveyor() != null){
+            moveByConveyor(player);
         }
     }
 

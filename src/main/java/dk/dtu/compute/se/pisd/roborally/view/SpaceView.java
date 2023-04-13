@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.model.Conveyor;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
@@ -80,8 +81,6 @@ public class SpaceView extends StackPane implements ViewObserver {
      * Draws the player icons.
      */
     private void updatePlayer() {
-        this.getChildren().clear();
-
         Player player = space.getPlayer();
         if (player != null) {
             Polygon arrow = new Polygon(0.0, 0.0,
@@ -105,8 +104,10 @@ public class SpaceView extends StackPane implements ViewObserver {
     @Override
     public void updateView(Subject subject) {
         if (subject == this.space) {
-            updatePlayer();
+            this.getChildren().clear();
+            updateConveyor();
             updateWalls();
+            updatePlayer();
         }
     }
 
@@ -128,6 +129,26 @@ public class SpaceView extends StackPane implements ViewObserver {
             line.setStroke(Color.YELLOW);
             pane.getChildren().add(line);
             this.getChildren().add(pane);
+        }
+    }
+
+    /**
+     * Draws the player icons.
+     */
+    private void updateConveyor() {
+        Conveyor conveyor = space.getConveyor();
+        if (conveyor != null) {
+            Polygon arrow = new Polygon(0.0, 0.0,
+                    SPACE_WIDTH/2-3, SPACE_HEIGHT-5,
+                    SPACE_HEIGHT-5, 0.0 );
+            try {
+                arrow.setFill(Color.LIGHTBLUE);
+            } catch (Exception e) {
+                arrow.setFill(Color.MEDIUMPURPLE);
+            }
+
+            arrow.setRotate((90*conveyor.getHeading().ordinal())%360);
+            this.getChildren().add(arrow);
         }
     }
 }

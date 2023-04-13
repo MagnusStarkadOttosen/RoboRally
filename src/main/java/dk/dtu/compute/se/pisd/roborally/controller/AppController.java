@@ -94,6 +94,13 @@ public class AppController implements Observer {
 
             board.getSpace(5,5).addWall(Heading.NORTH);
             board.getSpace(5,5).addWall(Heading.WEST);
+            board.getSpace(6,6).addConveyor(Heading.WEST);
+            board.getSpace(6,7).addConveyor(Heading.EAST);
+            board.getSpace(6,7).addWall(Heading.NORTH);
+
+            board.getSpace(4,1).addConveyor(Heading.SOUTH);
+            board.getSpace(4,2).addConveyor(Heading.SOUTH);
+            board.getSpace(4,3).addConveyor(Heading.SOUTH);
 
             // XXX: V2
             // board.setCurrentPlayer(board.getPlayer(0));
