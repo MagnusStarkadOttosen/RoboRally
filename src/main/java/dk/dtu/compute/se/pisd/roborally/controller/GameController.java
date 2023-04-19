@@ -276,6 +276,13 @@ public class GameController {
                         board.setPhase(Phase.PLAYER_INTERACTION);
                     }
                     break;
+                case Backwards:
+                    this.turnRight(player);
+                    this.turnRight(player);
+                    this.moveForward(player);
+                    this.turnRight(player);
+                    this.turnRight(player);
+                    break;
                 default:
                     // DO NOTHING (for now)
             }

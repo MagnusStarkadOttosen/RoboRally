@@ -55,7 +55,12 @@ public enum Command {
     /**
      * This command ask the player if they will turn left or right.
      */
-    OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT);
+    OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT),
+
+    /**
+     * This command moves the player a step back.
+     */
+    Backwards("Move back");
 
     final public String displayName;
 
