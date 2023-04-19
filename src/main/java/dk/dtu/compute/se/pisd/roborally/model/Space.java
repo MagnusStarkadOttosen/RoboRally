@@ -46,6 +46,7 @@ public class Space extends Subject {
     private Conveyor conveyor;
 
     private Gear gear;
+    private Checkpoint checkpoint;
 
     public Space(Board board, int x, int y) {
         this.board = board;
@@ -55,6 +56,7 @@ public class Space extends Subject {
         walls = new ArrayList<>();
         conveyor = null;
         gear = null;
+        checkpoint = null;
     }
 
     /**
@@ -137,5 +139,13 @@ public class Space extends Subject {
      */
     public Gear getGear(){
         return gear;
+    }
+
+    public void setCheckpoint(int number){
+        checkpoint = new Checkpoint(number);
+    }
+
+    public Checkpoint getCheckpoint(){
+        return checkpoint;
     }
 }

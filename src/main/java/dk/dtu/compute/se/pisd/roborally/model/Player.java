@@ -48,12 +48,15 @@ public class Player extends Subject {
     private CommandCardField[] program;
     private CommandCardField[] cards;
 
+    private int checkpoints;
+
     public Player(@NotNull Board board, String color, @NotNull String name) {
         this.board = board;
         this.name = name;
         this.color = color;
 
         this.space = null;
+        checkpoints = 0;
 
         program = new CommandCardField[NO_REGISTERS];
         for (int i = 0; i < program.length; i++) {
@@ -173,6 +176,14 @@ public class Player extends Subject {
      */
     public CommandCardField getCardField(int i) {
         return cards[i];
+    }
+
+    public void setCheckpoints(int checkpoints){
+        this.checkpoints = checkpoints;
+    }
+
+    public int getCheckpoints(){
+        return checkpoints;
     }
 
 }

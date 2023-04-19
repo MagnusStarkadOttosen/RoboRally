@@ -110,6 +110,7 @@ public class SpaceView extends StackPane implements ViewObserver {
             this.getChildren().clear();
             drawConveyor();
             drawGear();
+            drawCheckpoint();
             drawWalls();
             updatePlayer();
         }
@@ -174,9 +175,23 @@ public class SpaceView extends StackPane implements ViewObserver {
 
             this.getChildren().add(circle);
             this.getChildren().add(text);
+        }
+    }
 
+    private void drawCheckpoint(){
+        Checkpoint checkpoint = space.getCheckpoint();
+        if(checkpoint != null){
+            Circle circle = new Circle(SPACE_WIDTH/2-5);
+            Text text = new Text();
+            circle.setStrokeWidth(5);
+            circle.setStroke(Color.YELLOW);
+            text.setText(String.valueOf(checkpoint.getNumber()));
 
+            text.setFont(Font.font(10));
+            text.setStroke(Color.ORANGE);
 
+            this.getChildren().add(circle);
+            this.getChildren().add(text);
         }
     }
 }

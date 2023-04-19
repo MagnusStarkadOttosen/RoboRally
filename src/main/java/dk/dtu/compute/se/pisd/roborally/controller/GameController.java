@@ -213,8 +213,9 @@ public class GameController {
     }
 
     public void actionField(int step){
-        if (step >= Player.NO_REGISTERS) { //Runs after all players have moved.
-            for (int i = 0; i < board.getPlayersNumber(); i++) {
+        // TODO: Need complete rework. Possible moved out of gamecontroller.
+        for (int i = 0; i < board.getPlayersNumber(); i++) {
+            if (step >= Player.NO_REGISTERS) { //Runs after all players have moved.
                 if(board.getPlayer(i).getSpace().getConveyor() != null){
                     moveByConveyor(board.getPlayer(i));
                 }
@@ -223,6 +224,15 @@ public class GameController {
                         turnLeft(board.getPlayer(i));
                     }else{
                         turnRight(board.getPlayer(i));
+                    }
+                }
+            }
+            if(board.getPlayer(i).getSpace().getCheckpoint() != null){
+                if(board.getPlayer(i).getSpace().getCheckpoint().getNumber()>board.getPlayer(i).getCheckpoints() && board.getPlayer(i).getSpace().getCheckpoint().getNumber()<=board.getPlayer(i).getCheckpoints()+1){
+                    board.getPlayer(i).setCheckpoints(board.getPlayer(i).getSpace().getCheckpoint().getNumber());
+                    System.out.println("player: " + i + "have checkpoints: " + board.getPlayer(i).getCheckpoints());
+                    if(board.getPlayer(i).getCheckpoints()>= board.getNumOfCheckpoints()){
+                        System.out.println("Player have all checkpoints"); //TODO: Player have satisfied win condition. Need to stop game.
                     }
                 }
             }
