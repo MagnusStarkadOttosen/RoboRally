@@ -35,6 +35,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -158,15 +160,23 @@ public class SpaceView extends StackPane implements ViewObserver {
         Gear gear = space.getGear();
         if (gear != null) {
             Circle circle = new Circle(SPACE_WIDTH/2-5);
-
+            Text text = new Text();
             circle.setStrokeWidth(5);
             if(gear.getHeading()==Heading.WEST){
                 circle.setStroke(Color.GRAY);
+                text.setText("Anti-\nClockwise");
             }else{
                 circle.setStroke(Color.GREEN);
+                text.setText("Clockwise");
             }
+            text.setFont(Font.font(8));
+            text.setStroke(Color.ORANGE);
 
             this.getChildren().add(circle);
+            this.getChildren().add(text);
+
+
+
         }
     }
 }
