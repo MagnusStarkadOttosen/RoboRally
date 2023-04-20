@@ -178,10 +178,18 @@ public class Player extends Subject {
         return cards[i];
     }
 
+    /**
+     * Sets the variable checkpoint to the highest checkpoint the player have reached.
+     * @param checkpoints The number on the checkpoint.
+     */
     public void setCheckpoints(int checkpoints){
         this.checkpoints = checkpoints;
     }
 
+    /**
+     *
+     * @return The highest checkpoint the player have reached.
+     */
     public int getCheckpoints(){
         return checkpoints;
     }

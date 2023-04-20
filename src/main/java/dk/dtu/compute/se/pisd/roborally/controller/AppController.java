@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * ...
+ * Controlles the application.
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  *

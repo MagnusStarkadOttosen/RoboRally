@@ -25,7 +25,7 @@ import dk.dtu.compute.se.pisd.roborally.model.*;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * ...
+ * Controlles all functions of the game.
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  *
@@ -212,6 +212,10 @@ public class GameController {
         }
     }
 
+    /**
+     * Then player is on a space that have an action, example conveyor belt, gears and checkpoints, then do what the space require.
+     * @param step the current step if the round.
+     */
     public void actionField(int step){
         // TODO: Need complete rework. Possible moved out of gamecontroller.
         for (int i = 0; i < board.getPlayersNumber(); i++) {
@@ -239,6 +243,11 @@ public class GameController {
         }
     }
 
+    //TODO: needs change as conveyor dont function like that in the rules.
+    /**
+     * Moves the player in the direction of the conveyor.
+     * @param player The player that is standing on the conveyor.
+     */
     public void moveByConveyor(Player player){
         board.getNeighbour(player.getSpace(), player.getSpace().getConveyor().getHeading()).setPlayer(player);
         if(player.getSpace().getConveyor() != null){
@@ -248,7 +257,7 @@ public class GameController {
 
     // XXX: V2
     /**
-     *
+     * Calls the appropriate method for the command.
      * @param player The current player.
      * @param command The command that is executed.
      */
@@ -314,6 +323,11 @@ public class GameController {
         }
     }
 
+    /**
+     * Moves robots in front recursively.
+     * @param heading The heading of the original player that pushes.
+     * @param space The space that is moved to.
+     */
     public void pushPlayer(Heading heading, Space space){
         if(board.getNeighbour(space, heading).getPlayer() != null){
             pushPlayer(heading, board.getNeighbour(space, heading));
@@ -323,6 +337,12 @@ public class GameController {
         }
     }
 
+    /**
+     * CHecks if the player can move to space or is blocked by walls.
+     * @param heading The player heading.
+     * @param space The players starting space.
+     * @return Whether the path is blocked or not.
+     */
     public boolean isBlockedByWall(Heading heading, Space space){
         if(space.getWalls().contains((heading))){
             System.out.println("Wall it start space");

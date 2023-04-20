@@ -40,9 +40,9 @@ import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-
+//TODO: the current icons should be changed to images
 /**
- * ...
+ * What is drawn on each space.
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  *
@@ -157,6 +157,9 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
     }
 
+    /**
+     * Draws the gear icon.
+     */
     private void drawGear(){
         Gear gear = space.getGear();
         if (gear != null) {
@@ -178,6 +181,9 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
     }
 
+    /**
+     * Draws the checkpoint icon.
+     */
     private void drawCheckpoint(){
         Checkpoint checkpoint = space.getCheckpoint();
         if(checkpoint != null){

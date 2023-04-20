@@ -67,6 +67,10 @@ public class Space extends Subject {
         return player;
     }
 
+    /**
+     * Sets the position of the player to the space.
+     * @param player The player that is placed.
+     */
     public void setPlayer(Player player) {
         Player oldPlayer = this.player;
         if (player != oldPlayer &&
@@ -141,10 +145,18 @@ public class Space extends Subject {
         return gear;
     }
 
+    /**
+     * Adds a checkpoint with a number to the space.
+     * @param number
+     */
     public void setCheckpoint(int number){
         checkpoint = new Checkpoint(number);
     }
 
+    /**
+     *
+     * @return The checkpoint if any.
+     */
     public Checkpoint getCheckpoint(){
         return checkpoint;
     }
