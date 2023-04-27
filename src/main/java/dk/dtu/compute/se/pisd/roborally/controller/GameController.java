@@ -285,6 +285,9 @@ public class GameController {
                         board.setPhase(Phase.PLAYER_INTERACTION);
                     }
                     break;
+                case U_TURN:
+                    this.UTurn(player);
+                    break;
                 case Backwards:
                     this.turnRight(player);
                     this.turnRight(player);
@@ -296,6 +299,31 @@ public class GameController {
                     // DO NOTHING (for now)
             }
         }
+    }
+// U-TURN
+//Turn your robot 180 degrees
+//so it faces the opposite direction. The robot remains in its
+//current space.
+    public void UTurn(@NotNull Player player) {
+        if (player != null && player.board == board) {
+            Heading currentHeading = player.getHeading();
+            switch (currentHeading) {
+                case NORTH:
+                    player.setHeading(Heading.SOUTH);
+                    break;
+                case EAST:
+                    player.setHeading(Heading.WEST);
+                    break;
+                case SOUTH:
+                    player.setHeading(Heading.NORTH);
+                    break;
+                case WEST:
+                    player.setHeading(Heading.EAST);
+                    break;
+            }
+
+        }
+
     }
 
     // TODO: V2

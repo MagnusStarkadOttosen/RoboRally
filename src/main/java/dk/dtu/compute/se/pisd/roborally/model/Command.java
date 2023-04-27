@@ -60,7 +60,10 @@ public enum Command {
     /**
      * This command moves the player a step back.
      */
-    Backwards("Move back");
+    Backwards("Move back"),
+    U_TURN("U_Turn");
+
+
 
     final public String displayName;
 
