@@ -22,6 +22,9 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.Conveyor;
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+import dk.dtu.compute.se.pisd.roborally.controller.Gear;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +51,8 @@ public class Space extends Subject {
     private Gear gear;
     private Checkpoint checkpoint;
 
+    List<FieldAction> actions;
+
     public Space(Board board, int x, int y) {
         this.board = board;
         this.x = x;
@@ -57,6 +62,7 @@ public class Space extends Subject {
         conveyor = null;
         gear = null;
         checkpoint = null;
+        actions = new ArrayList<>();
     }
 
     /**
@@ -133,8 +139,8 @@ public class Space extends Subject {
      * Adds a gear to the space.
      * @param heading If WEST rotate player anti-clockwise, if EAST rotate clockwise.
      */
-    public void addGear(Heading heading){
-        gear = new Gear(heading);
+    public void addGear(Rotation rotation){
+        gear = new Gear(rotation);
     }
 
     /**
@@ -159,5 +165,9 @@ public class Space extends Subject {
      */
     public Checkpoint getCheckpoint(){
         return checkpoint;
+    }
+
+    public List<FieldAction> getActions() {
+        return actions;
     }
 }

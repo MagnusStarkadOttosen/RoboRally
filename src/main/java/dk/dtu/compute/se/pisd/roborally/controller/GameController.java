@@ -221,14 +221,16 @@ public class GameController {
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             if (step >= Player.NO_REGISTERS) { //Runs after all players have moved.
                 if(board.getPlayer(i).getSpace().getConveyor() != null){
-                    moveByConveyor(board.getPlayer(i));
+                    //moveByConveyor(board.getPlayer(i));
+                    board.getPlayer(i).getSpace().getConveyor().doAction(this,board.getPlayer(i).getSpace());
                 }
                 if(board.getPlayer(i).getSpace().getGear() != null){
-                    if(board.getPlayer(i).getSpace().getGear().getHeading() == Heading.WEST){
+                    /*if(board.getPlayer(i).getSpace().getGear().getHeading() == Heading.WEST){
                         turnLeft(board.getPlayer(i));
                     }else{
                         turnRight(board.getPlayer(i));
-                    }
+                    }*/
+                    board.getPlayer(i).getSpace().getGear().doAction(this,board.getPlayer(i).getSpace());
                 }
             }
             if(board.getPlayer(i).getSpace().getCheckpoint() != null){
@@ -241,6 +243,7 @@ public class GameController {
                 }
             }
         }
+
     }
 
     //TODO: needs change as conveyor dont function like that in the rules.
@@ -320,6 +323,23 @@ public class GameController {
                 }
 
             }
+        }
+    }
+
+    /**
+     *
+     * @param player Player that is moved.
+     * @param space Space that is move from.
+     * @param heading Direction that is moved to.
+     */
+    public void moveToSpace(Player player, Space space, Heading heading){
+        Space target = board.getNeighbour(space, heading);
+
+        if(target.getPlayer() != null){
+            pushPlayer(heading, board.getNeighbour(space, heading));
+        }
+        if(target.getPlayer() == null && !isBlockedByWall(heading, space)){
+            target.setPlayer(player);
         }
     }
 

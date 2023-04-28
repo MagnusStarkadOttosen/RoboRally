@@ -26,9 +26,7 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
 
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -102,8 +100,8 @@ public class AppController implements Observer {
             board.getSpace(4,2).addConveyor(Heading.SOUTH);
             board.getSpace(4,3).addConveyor(Heading.SOUTH);
 
-            board.getSpace(1,3).addGear(Heading.WEST);
-            board.getSpace(1,4).addGear(Heading.EAST);
+            board.getSpace(1,3).addGear(Rotation.AntiClockwise);
+            board.getSpace(1,4).addGear(Rotation.Clockwise);
 
             board.getSpace(1,5).setCheckpoint(1);
             board.getSpace(1,6).setCheckpoint(2);

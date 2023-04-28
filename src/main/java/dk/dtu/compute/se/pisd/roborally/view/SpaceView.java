@@ -22,19 +22,18 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.Conveyor;
+import dk.dtu.compute.se.pisd.roborally.controller.Gear;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
@@ -166,7 +165,7 @@ public class SpaceView extends StackPane implements ViewObserver {
             Circle circle = new Circle(SPACE_WIDTH/2-5);
             Text text = new Text();
             circle.setStrokeWidth(5);
-            if(gear.getHeading()==Heading.WEST){
+            if(gear.getRotation() == Rotation.AntiClockwise){
                 circle.setStroke(Color.GRAY);
                 text.setText("Anti-\nClockwise");
             }else{
