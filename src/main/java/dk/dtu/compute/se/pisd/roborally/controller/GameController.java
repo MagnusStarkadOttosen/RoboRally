@@ -248,7 +248,7 @@ public class GameController {
      * Moves the player in the direction of the conveyor.
      * @param player The player that is standing on the conveyor.
      */
-    public void moveByConveyor(Player player){
+    public void moveByConveyor(@NotNull Player player){
         board.getNeighbour(player.getSpace(), player.getSpace().getConveyor().getHeading()).setPlayer(player);
         if(player.getSpace().getConveyor() != null){
             moveByConveyor(player);
@@ -280,10 +280,16 @@ public class GameController {
                 case FAST_FORWARD:
                     this.fastForward(player);
                     break;
-                case OPTION_LEFT_RIGHT:
+                case  MOVE3_FORWARD:
+                    this.move3Forward(player);
+                    break;
+                case OPTION_LEFT_RIGHT,SANDBOX_ROUTINE,WEASEL_ROUTINE:
                     if(command.isInteractive()){ // If the card that is being activated require player input change phase.
                         board.setPhase(Phase.PLAYER_INTERACTION);
                     }
+                    break;
+                case SPEED_ROUTINE:
+                    this.speedRoutine(player);
                     break;
                 case U_TURN:
                     this.UTurn(player);
@@ -300,10 +306,26 @@ public class GameController {
             }
         }
     }
-// U-TURN
-//Turn your robot 180 degrees
-//so it faces the opposite direction. The robot remains in its
-//current space.
+
+    public void speedRoutine(@NotNull Player player) {
+        move3Forward(player);
+    }
+
+    public void move3Forward(@NotNull Player player) {
+        moveForward(player);
+        moveForward(player);
+        moveForward(player);
+
+    }
+
+    /**
+     *  U-TURN
+     * Turn your robot 180 degrees
+     * so it faces the opposite direction. The robot remains in its
+     * current space.
+     *
+     */
+
     public void UTurn(@NotNull Player player) {
         if (player != null && player.board == board) {
             Heading currentHeading = player.getHeading();

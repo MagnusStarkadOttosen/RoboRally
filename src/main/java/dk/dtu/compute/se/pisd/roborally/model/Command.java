@@ -61,7 +61,44 @@ public enum Command {
      * This command moves the player a step back.
      */
     Backwards("Move back"),
-    U_TURN("U_Turn");
+    /**
+     * This command turn the player 180 degrees.
+     */
+    U_TURN("U_Turn"),
+    /**
+     * Moves the player 3 spaces in the heading of the player.
+     */
+    MOVE3_FORWARD("MOVE3_FORWARD"),
+
+
+    /**
+     *
+     * SANDBOX ROUTINE
+     * Choose one of the following
+     * actions to perform this register:
+     * Move 1, 2, or 3
+     * Back Up
+     * Turn Left
+     * Turn Right
+     * U-Turn
+     */
+    SANDBOX_ROUTINE("sandbox-routine",FORWARD,FAST_FORWARD,MOVE3_FORWARD,Backwards,LEFT,RIGHT,U_TURN),
+    /**
+     * SPEED ROUTINE
+     * Move your robot 3 spaces in
+     * the direction it is facing.
+     */
+    SPEED_ROUTINE("speed-routine"),
+    /**
+     *  Choose one of the
+     * following actions to
+     * perform this register:
+     * Turn Left
+     * Turn Right
+     * U-Turn
+     */
+    WEASEL_ROUTINE("weasel-routine",LEFT,RIGHT,U_TURN);
+
 
 
 
