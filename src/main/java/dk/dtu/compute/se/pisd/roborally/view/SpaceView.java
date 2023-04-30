@@ -22,7 +22,9 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.controller.Conveyor;
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.Gear;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
@@ -107,9 +109,10 @@ public class SpaceView extends StackPane implements ViewObserver {
     public void updateView(Subject subject) {
         if (subject == this.space) {
             this.getChildren().clear();
-            drawConveyor();
-            drawGear();
-            drawCheckpoint();
+//            drawConveyor();
+            drawActionField();
+//            drawGear();
+//            drawCheckpoint();
             drawWalls();
             updatePlayer();
         }
@@ -139,64 +142,118 @@ public class SpaceView extends StackPane implements ViewObserver {
     /**
      * Draws the player icons.
      */
-    private void drawConveyor() {
-        Conveyor conveyor = space.getConveyor();
-        if (conveyor != null) {
-            Polygon arrow = new Polygon(0.0, 0.0,
-                    SPACE_WIDTH/2-3, SPACE_HEIGHT-5,
-                    SPACE_HEIGHT-5, 0.0 );
-            try {
-                arrow.setFill(Color.LIGHTBLUE);
-            } catch (Exception e) {
-                arrow.setFill(Color.MEDIUMPURPLE);
-            }
-
-            arrow.setRotate((90*conveyor.getHeading().ordinal())%360);
-            this.getChildren().add(arrow);
-        }
-    }
+//    private void drawConveyor() {
+//        Conveyor conveyor = space.getConveyor();
+//        if (conveyor != null) {
+//            Polygon arrow = new Polygon(0.0, 0.0,
+//                    SPACE_WIDTH/2-3, SPACE_HEIGHT-5,
+//                    SPACE_HEIGHT-5, 0.0 );
+//            try {
+//                arrow.setFill(Color.LIGHTBLUE);
+//            } catch (Exception e) {
+//                arrow.setFill(Color.MEDIUMPURPLE);
+//            }
+//
+//            arrow.setRotate((90*conveyor.getHeading().ordinal())%360);
+//            this.getChildren().add(arrow);
+//        }
+//    }
 
     /**
      * Draws the gear icon.
      */
-    private void drawGear(){
-        Gear gear = space.getGear();
-        if (gear != null) {
-            Circle circle = new Circle(SPACE_WIDTH/2-5);
-            Text text = new Text();
-            circle.setStrokeWidth(5);
-            if(gear.getRotation() == Rotation.AntiClockwise){
-                circle.setStroke(Color.GRAY);
-                text.setText("Anti-\nClockwise");
-            }else{
-                circle.setStroke(Color.GREEN);
-                text.setText("Clockwise");
-            }
-            text.setFont(Font.font(8));
-            text.setStroke(Color.ORANGE);
-
-            this.getChildren().add(circle);
-            this.getChildren().add(text);
-        }
-    }
+//    private void drawGear(){
+//        Gear gear = space.getGear();
+//        if (gear != null) {
+//            Circle circle = new Circle(SPACE_WIDTH/2-5);
+//            Text text = new Text();
+//            circle.setStrokeWidth(5);
+//            if(gear.getRotation() == Rotation.AntiClockwise){
+//                circle.setStroke(Color.GRAY);
+//                text.setText("Anti-\nClockwise");
+//            }else{
+//                circle.setStroke(Color.GREEN);
+//                text.setText("Clockwise");
+//            }
+//            text.setFont(Font.font(8));
+//            text.setStroke(Color.ORANGE);
+//
+//            this.getChildren().add(circle);
+//            this.getChildren().add(text);
+//        }
+//    }
 
     /**
      * Draws the checkpoint icon.
      */
-    private void drawCheckpoint(){
-        Checkpoint checkpoint = space.getCheckpoint();
-        if(checkpoint != null){
-            Circle circle = new Circle(SPACE_WIDTH/2-5);
-            Text text = new Text();
-            circle.setStrokeWidth(5);
-            circle.setStroke(Color.YELLOW);
-            text.setText(String.valueOf(checkpoint.getNumber()));
+//    private void drawCheckpoint(){
+//        Checkpoint checkpoint = space.getCheckpoint();
+//        if(checkpoint != null){
+//            Circle circle = new Circle(SPACE_WIDTH/2-5);
+//            Text text = new Text();
+//            circle.setStrokeWidth(5);
+//            circle.setStroke(Color.YELLOW);
+//            text.setText(String.valueOf(checkpoint.getNumber()));
+//
+//            text.setFont(Font.font(10));
+//            text.setStroke(Color.ORANGE);
+//
+//            this.getChildren().add(circle);
+//            this.getChildren().add(text);
+//        }
+//    }
 
-            text.setFont(Font.font(10));
-            text.setStroke(Color.ORANGE);
+    /**
+     * Draws the action field on the space. Action field include conveyor, gear and checkpoints.
+     */
+    private void drawActionField(){
+        List<FieldAction> actions = space.getActions();
 
-            this.getChildren().add(circle);
-            this.getChildren().add(text);
+        for (FieldAction action:
+             actions) {
+            if (action.getClass() == Conveyor.class) {
+                Polygon arrow = new Polygon(0.0, 0.0,
+                        SPACE_WIDTH/2-3, SPACE_HEIGHT-5,
+                        SPACE_HEIGHT-5, 0.0 );
+                try {
+                    arrow.setFill(Color.LIGHTBLUE);
+                } catch (Exception e) {
+                    arrow.setFill(Color.MEDIUMPURPLE);
+                }
+
+                arrow.setRotate((90* ((Conveyor) action).getHeading().ordinal())%360);
+                this.getChildren().add(arrow);
+            }
+            if (action.getClass() == Gear.class) {
+                Circle circle = new Circle(SPACE_WIDTH/2-5);
+                Text text = new Text();
+                circle.setStrokeWidth(5);
+                if(((Gear) action).getRotation() == Rotation.AntiClockwise){
+                    circle.setStroke(Color.GRAY);
+                    text.setText("Anti-\nClockwise");
+                }else{
+                    circle.setStroke(Color.GREEN);
+                    text.setText("Clockwise");
+                }
+                text.setFont(Font.font(8));
+                text.setStroke(Color.ORANGE);
+
+                this.getChildren().add(circle);
+                this.getChildren().add(text);
+            }
+            if(action.getClass() == Checkpoint.class){
+                Circle circle = new Circle(SPACE_WIDTH/2-5);
+                Text text = new Text();
+                circle.setStrokeWidth(5);
+                circle.setStroke(Color.YELLOW);
+                text.setText(String.valueOf(((Checkpoint) action).getNumber()));
+
+                text.setFont(Font.font(10));
+                text.setStroke(Color.ORANGE);
+
+                this.getChildren().add(circle);
+                this.getChildren().add(text);
+            }
         }
     }
 }

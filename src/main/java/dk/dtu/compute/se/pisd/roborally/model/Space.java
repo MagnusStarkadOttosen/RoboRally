@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.controller.Conveyor;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.Gear;
@@ -46,12 +47,12 @@ public class Space extends Subject {
 
     private List<Heading> walls;
 
-    private Conveyor conveyor;
+//    private Conveyor conveyor;
 
-    private Gear gear;
-    private Checkpoint checkpoint;
+//    private Gear gear;
+//    private Checkpoint checkpoint;
 
-    List<FieldAction> actions;
+    private List<FieldAction> actions;
 
     public Space(Board board, int x, int y) {
         this.board = board;
@@ -59,9 +60,9 @@ public class Space extends Subject {
         this.y = y;
         player = null;
         walls = new ArrayList<>();
-        conveyor = null;
-        gear = null;
-        checkpoint = null;
+//        conveyor = null;
+//        gear = null;
+//        checkpoint = null;
         actions = new ArrayList<>();
     }
 
@@ -124,49 +125,56 @@ public class Space extends Subject {
      * @param heading The direction the wall is blocking.
      */
     public void addConveyor(Heading heading){
-        conveyor = new Conveyor(heading);
+//        conveyor = new Conveyor(heading);
+        actions.add(new Conveyor(heading));
     }
 
     /**
      * Returns the space's conveyors. If any.
      * @return conveyor
      */
-    public Conveyor getConveyor(){
-        return conveyor;
-    }
+//    public Conveyor getConveyor(){
+//        return conveyor;
+//    }
 
     /**
      * Adds a gear to the space.
      * @param heading If WEST rotate player anti-clockwise, if EAST rotate clockwise.
      */
     public void addGear(Rotation rotation){
-        gear = new Gear(rotation);
+//        gear = new Gear(rotation);
+        actions.add(new Gear(rotation));
     }
 
     /**
      * Returns the space's gear. If any.
      * @return conveyor
      */
-    public Gear getGear(){
-        return gear;
-    }
+//    public Gear getGear(){
+//        return gear;
+//    }
 
     /**
      * Adds a checkpoint with a number to the space.
      * @param number
      */
     public void setCheckpoint(int number){
-        checkpoint = new Checkpoint(number);
+//        checkpoint = new Checkpoint(number);
+        actions.add(new Checkpoint(number));
     }
 
     /**
      *
      * @return The checkpoint if any.
      */
-    public Checkpoint getCheckpoint(){
-        return checkpoint;
-    }
+//    public Checkpoint getCheckpoint(){
+//        return checkpoint;
+//    }
 
+    /**
+     *
+     * @return List of all actions the space can do.
+     */
     public List<FieldAction> getActions() {
         return actions;
     }

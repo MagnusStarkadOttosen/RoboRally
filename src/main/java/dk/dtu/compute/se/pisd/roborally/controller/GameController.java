@@ -24,6 +24,8 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * Controlles all functions of the game.
  *
@@ -218,31 +220,60 @@ public class GameController {
      */
     public void actionField(int step){
         // TODO: Need complete rework. Possible moved out of gamecontroller.
+//        for (int i = 0; i < board.getPlayersNumber(); i++) {
+//            if (step >= Player.NO_REGISTERS) { //Runs after all players have moved.
+//                if(board.getPlayer(i).getSpace().getConveyor() != null){
+//                    //moveByConveyor(board.getPlayer(i));
+//                    board.getPlayer(i).getSpace().getConveyor().doAction(this,board.getPlayer(i).getSpace());
+//                }
+//                if(board.getPlayer(i).getSpace().getGear() != null){
+//                    /*if(board.getPlayer(i).getSpace().getGear().getHeading() == Heading.WEST){
+//                        turnLeft(board.getPlayer(i));
+//                    }else{
+//                        turnRight(board.getPlayer(i));
+//                    }*/
+//                    board.getPlayer(i).getSpace().getGear().doAction(this,board.getPlayer(i).getSpace());
+//                }
+//            }
+//            if(board.getPlayer(i).getSpace().getCheckpoint() != null){
+////                if(board.getPlayer(i).getSpace().getCheckpoint().getNumber()>board.getPlayer(i).getCheckpoints() && board.getPlayer(i).getSpace().getCheckpoint().getNumber()<=board.getPlayer(i).getCheckpoints()+1){
+////                    board.getPlayer(i).setCheckpoints(board.getPlayer(i).getSpace().getCheckpoint().getNumber());
+////                    System.out.println("player: " + i + "have checkpoints: " + board.getPlayer(i).getCheckpoints());
+////                    if(board.getPlayer(i).getCheckpoints()>= board.getNumOfCheckpoints()){
+////                        System.out.println("Player have all checkpoints"); //TODO: Player have satisfied win condition. Need to stop game.
+////                    }
+////                }
+//                board.getPlayer(i).getSpace().getCheckpoint().doAction(this, board.getPlayer(i).getSpace());
+//            }
+//        }
+
+
+//        for (int i = 0; i < board.width; i++) {
+//            for (int j = 0; j < board.height; j++) {
+//                List<FieldAction> actions = board.getSpace(i,j).getActions();
+//
+//                for (FieldAction action:
+//                     actions) {
+//                    action.doAction(this, board.getSpace(i,j));
+//                }
+//
+//            }
+//        }
+
         for (int i = 0; i < board.getPlayersNumber(); i++) {
-            if (step >= Player.NO_REGISTERS) { //Runs after all players have moved.
-                if(board.getPlayer(i).getSpace().getConveyor() != null){
-                    //moveByConveyor(board.getPlayer(i));
-                    board.getPlayer(i).getSpace().getConveyor().doAction(this,board.getPlayer(i).getSpace());
-                }
-                if(board.getPlayer(i).getSpace().getGear() != null){
-                    /*if(board.getPlayer(i).getSpace().getGear().getHeading() == Heading.WEST){
-                        turnLeft(board.getPlayer(i));
-                    }else{
-                        turnRight(board.getPlayer(i));
-                    }*/
-                    board.getPlayer(i).getSpace().getGear().doAction(this,board.getPlayer(i).getSpace());
-                }
+            Player player = board.getPlayer(i);
+
+            List<FieldAction> actions = player.getSpace().getActions();
+            for (FieldAction action:
+                     actions) {
+                action.doAction(this, player.getSpace());
             }
-            if(board.getPlayer(i).getSpace().getCheckpoint() != null){
-                if(board.getPlayer(i).getSpace().getCheckpoint().getNumber()>board.getPlayer(i).getCheckpoints() && board.getPlayer(i).getSpace().getCheckpoint().getNumber()<=board.getPlayer(i).getCheckpoints()+1){
-                    board.getPlayer(i).setCheckpoints(board.getPlayer(i).getSpace().getCheckpoint().getNumber());
-                    System.out.println("player: " + i + "have checkpoints: " + board.getPlayer(i).getCheckpoints());
-                    if(board.getPlayer(i).getCheckpoints()>= board.getNumOfCheckpoints()){
-                        System.out.println("Player have all checkpoints"); //TODO: Player have satisfied win condition. Need to stop game.
-                    }
-                }
-            }
+
+
         }
+
+
+
 
     }
 
@@ -251,12 +282,12 @@ public class GameController {
      * Moves the player in the direction of the conveyor.
      * @param player The player that is standing on the conveyor.
      */
-    public void moveByConveyor(Player player){
-        board.getNeighbour(player.getSpace(), player.getSpace().getConveyor().getHeading()).setPlayer(player);
-        if(player.getSpace().getConveyor() != null){
-            moveByConveyor(player);
-        }
-    }
+//    public void moveByConveyor(Player player){
+//        board.getNeighbour(player.getSpace(), player.getSpace().getConveyor().getHeading()).setPlayer(player);
+//        if(player.getSpace().getConveyor() != null){
+//            moveByConveyor(player);
+//        }
+//    }
 
     // XXX: V2
     /**
