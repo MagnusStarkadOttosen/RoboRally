@@ -294,6 +294,12 @@ public class GameController {
                 case U_TURN:
                     this.UTurn(player);
                     break;
+                case SPAM_CARD:
+                    this.spamCard(player);
+                    break;
+                case TROJAN_HORSE:
+                    this.trojanHorse(player);
+                    break;
                 case Backwards:
                     this.turnRight(player);
                     this.turnRight(player);
@@ -305,6 +311,18 @@ public class GameController {
                     // DO NOTHING (for now)
             }
         }
+    }
+
+    public void spamCard(@NotNull Player player) {
+        if(player != null && player.board == board) {
+            int steps = board.getStep();
+            CommandCard card = generateRandomCommandCard();
+            player.set(steps,card);
+        }
+    }
+    public void trojanHorse(@NotNull Player player) {
+        spamCard(player);
+        spamCard(player);
     }
 
     public void speedRoutine(@NotNull Player player) {

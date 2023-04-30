@@ -97,7 +97,15 @@ public enum Command {
      * Turn Right
      * U-Turn
      */
-    WEASEL_ROUTINE("weasel-routine",LEFT,RIGHT,U_TURN);
+    WEASEL_ROUTINE("weasel-routine",LEFT,RIGHT,U_TURN),
+    /**
+     * spamCard
+     */
+    SPAM_CARD("spam-card"),
+/**
+ *  take two spamCard
+ */
+    TROJAN_HORSE("Trojan-Horse");
 
 
 

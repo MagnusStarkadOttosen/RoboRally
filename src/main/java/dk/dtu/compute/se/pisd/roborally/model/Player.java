@@ -193,5 +193,8 @@ public class Player extends Subject {
     public int getCheckpoints(){
         return checkpoints;
     }
+    public void set(int s,CommandCard card){
+        program[s].setCard(card);
+    }
 
 }
