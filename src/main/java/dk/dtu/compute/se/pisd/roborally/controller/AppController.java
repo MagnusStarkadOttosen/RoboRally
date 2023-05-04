@@ -26,13 +26,12 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
 
+import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 
 import javafx.application.Platform;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceDialog;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -58,6 +57,8 @@ public class AppController implements Observer {
         this.roboRally = roboRally;
     }
 
+    private Board board;
+
     /**
      * Prompts user for amount of players and creates a board.
      * Currently, a temp board.
@@ -77,9 +78,19 @@ public class AppController implements Observer {
                 }
             }
 
+            ChoiceDialog<String> mapChoice = new ChoiceDialog<>("map1", "map1", "map2", "map3");
+            mapChoice.setTitle("Select map");
+            mapChoice.setHeaderText("Select map");
+            Optional<String> mapResult = mapChoice.showAndWait();
+
+            System.out.println(mapResult.get());
+
+            board = LoadBoard.loadBoard(mapResult.get());
+
+
             // XXX the board should eventually be created programmatically or loaded from a file
             //     here we just create an empty board with the required number of players.
-            Board board = new Board(8,8);
+            //board = new Board(8,8);
             gameController = new GameController(board);
             int no = result.get();
             for (int i = 0; i < no; i++) {
@@ -88,24 +99,24 @@ public class AppController implements Observer {
                 player.setSpace(board.getSpace(i % board.width, i));
             }
 
-            board.getSpace(3,3).addWall(Heading.SOUTH);
-
-            board.getSpace(5,5).addWall(Heading.NORTH);
-            board.getSpace(5,5).addWall(Heading.WEST);
-            board.getSpace(6,6).addConveyor(Heading.WEST);
-            board.getSpace(6,7).addConveyor(Heading.EAST);
-            board.getSpace(6,7).addWall(Heading.NORTH);
-
-            board.getSpace(4,1).addConveyor(Heading.SOUTH);
-            board.getSpace(4,2).addConveyor(Heading.SOUTH);
-            board.getSpace(4,3).addConveyor(Heading.SOUTH);
-
-            board.getSpace(1,3).addGear(Rotation.AntiClockwise);
-            board.getSpace(1,4).addGear(Rotation.Clockwise);
-
-            board.getSpace(1,5).setCheckpoint(1);
-            board.getSpace(1,6).setCheckpoint(2);
-            board.setNumOfCheckpoints(2);
+//            board.getSpace(3,3).addWall(Heading.SOUTH);
+//
+//            board.getSpace(5,5).addWall(Heading.NORTH);
+//            board.getSpace(5,5).addWall(Heading.WEST);
+//            board.getSpace(6,6).addConveyor(Heading.WEST);
+//            board.getSpace(6,7).addConveyor(Heading.EAST);
+//            board.getSpace(6,7).addWall(Heading.NORTH);
+//
+//            board.getSpace(4,1).addConveyor(Heading.SOUTH);
+//            board.getSpace(4,2).addConveyor(Heading.SOUTH);
+//            board.getSpace(4,3).addConveyor(Heading.SOUTH);
+//
+//            board.getSpace(1,3).addGear(Rotation.AntiClockwise);
+//            board.getSpace(1,4).addGear(Rotation.Clockwise);
+//
+//            board.getSpace(1,5).setCheckpoint(1);
+//            board.getSpace(1,6).setCheckpoint(2);
+//            board.setNumOfCheckpoints(2);
 
             // XXX: V2
             // board.setCurrentPlayer(board.getPlayer(0));
@@ -120,6 +131,15 @@ public class AppController implements Observer {
      */
     public void saveGame() {
         // XXX needs to be implemented eventually
+
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Save Game");
+        dialog.setHeaderText("Input name of save");
+        Optional<String> result = dialog.showAndWait();
+
+
+        LoadBoard.saveBoard(board, result.get());
+
     }
 
     /**
@@ -130,8 +150,47 @@ public class AppController implements Observer {
         // XXX needs to be implememted eventually
         // for now, we just create a new game
         if (gameController == null) {
-            newGame();
+//            newGame();
+
+
+//            ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
+//            dialog.setTitle("Player number");
+//            dialog.setHeaderText("Select number of players");
+//            Optional<Integer> result = dialog.showAndWait();
+
+            Optional<String> result;
+            do{
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Load Game");
+                dialog.setHeaderText("Input file to load");
+                result = dialog.showAndWait();
+            }while(!LoadBoard.filePresent(result.get()));
+
+
+
+
+
+            System.out.println("File to load: " + result.get());
+
+
+
+
+            board = LoadBoard.loadBoard(result.get());
+            gameController = new GameController(board);
+//            int no = result.get();
+//            for (int i = 0; i < no; i++) {
+//                Player player = new Player(board, PLAYER_COLORS.get(i), "Player " + (i + 1));
+//                board.addPlayer(player);
+//                player.setSpace(board.getSpace(i % board.width, i));
+//            }
+
+            gameController.startProgrammingPhase();
+
+            roboRally.createBoardView(gameController);
         }
+
+
+
     }
 
     /**
@@ -147,7 +206,7 @@ public class AppController implements Observer {
         if (gameController != null) {
 
             // here we save the game (without asking the user).
-            saveGame();
+            //saveGame();
 
             gameController = null;
             roboRally.createBoardView(null);

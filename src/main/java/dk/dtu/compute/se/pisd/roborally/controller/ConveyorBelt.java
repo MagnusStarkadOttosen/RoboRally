@@ -6,10 +6,10 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
 /**
  * Conveyors move the player in an direction.
  */
-public class Conveyor extends FieldAction {
+public class ConveyorBelt extends FieldAction {
     private Heading heading;
 
-    public Conveyor(Heading heading){
+    public ConveyorBelt(Heading heading){
         this.heading = heading;
     }
 

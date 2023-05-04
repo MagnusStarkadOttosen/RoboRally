@@ -23,7 +23,7 @@ package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
-import dk.dtu.compute.se.pisd.roborally.controller.Conveyor;
+import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.Gear;
 import dk.dtu.compute.se.pisd.roborally.model.*;
@@ -211,7 +211,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
         for (FieldAction action:
              actions) {
-            if (action.getClass() == Conveyor.class) {
+            if (action.getClass() == ConveyorBelt.class) {
                 Polygon arrow = new Polygon(0.0, 0.0,
                         SPACE_WIDTH/2-3, SPACE_HEIGHT-5,
                         SPACE_HEIGHT-5, 0.0 );
@@ -221,7 +221,7 @@ public class SpaceView extends StackPane implements ViewObserver {
                     arrow.setFill(Color.MEDIUMPURPLE);
                 }
 
-                arrow.setRotate((90* ((Conveyor) action).getHeading().ordinal())%360);
+                arrow.setRotate((90* ((ConveyorBelt) action).getHeading().ordinal())%360);
                 this.getChildren().add(arrow);
             }
             if (action.getClass() == Gear.class) {

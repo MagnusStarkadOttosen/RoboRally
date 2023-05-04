@@ -26,11 +26,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.BoardTemplate;
+import dk.dtu.compute.se.pisd.roborally.fileaccess.model.PlayerTemplate;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.SpaceTemplate;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 
+import java.awt.*;
 import java.io.*;
 
 /**
@@ -77,6 +80,15 @@ public class LoadBoard {
                     space.getWalls().addAll(spaceTemplate.walls);
                 }
             }
+            for (PlayerTemplate playerTemplate: template.players) {
+                Space space = result.getSpace(playerTemplate.x, playerTemplate.y);
+                if(space != null){
+                    Player player = new Player(result, playerTemplate.color, playerTemplate.playerName);
+                    player.setHeading(playerTemplate.playerHeading);
+                    result.addPlayer(player);
+                    space.setPlayer(player);
+                }
+            }
 			reader.close();
 			return result;
 		} catch (IOException e1) {
@@ -111,8 +123,30 @@ public class LoadBoard {
                     spaceTemplate.walls.addAll(space.getWalls());
                     template.spaces.add(spaceTemplate);
                 }
+//                if(space.getPlayer() != null){
+//                    PlayerTemplate playerTemplate = new PlayerTemplate();
+//                    playerTemplate.x = space.x;
+//                    playerTemplate.y = space.y;
+//                    playerTemplate.playerName = space.getPlayer().getName();
+//                    playerTemplate.color = space.getPlayer().getColor();
+//                    playerTemplate.playerHeading = space.getPlayer().getHeading();
+//                    template.players.add(playerTemplate);
+//                }
             }
         }
+        for (Player player: board.getPlayers()) {
+            Space space = player.getSpace();
+            PlayerTemplate playerTemplate = new PlayerTemplate();
+            playerTemplate.x = space.x;
+            playerTemplate.y = space.y;
+            playerTemplate.playerName = space.getPlayer().getName();
+            playerTemplate.color = space.getPlayer().getColor();
+            playerTemplate.playerHeading = space.getPlayer().getHeading();
+            template.players.add(playerTemplate);
+        }
+
+
+
 
         ClassLoader classLoader = LoadBoard.class.getClassLoader();
         // TODO: this is not very defensive, and will result in a NullPointerException
@@ -120,6 +154,8 @@ public class LoadBoard {
         //       the file "simpleCards.json" to exist!
         String filename =
                 classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
+
+        System.out.println("Filename: " + filename);
 
         // In simple cases, we can create a Gson object with new:
         //
@@ -152,6 +188,16 @@ public class LoadBoard {
                     fileWriter.close();
                 } catch (IOException e2) {}
             }
+        }
+    }
+
+    public static boolean filePresent(String boardname){
+        ClassLoader classLoader = LoadBoard.class.getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
+        if (inputStream == null) {
+            return false;
+        }else{
+            return true;
         }
     }
 

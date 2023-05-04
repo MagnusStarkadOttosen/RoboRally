@@ -23,7 +23,7 @@ package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
-import dk.dtu.compute.se.pisd.roborally.controller.Conveyor;
+import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.Gear;
 
@@ -126,7 +126,7 @@ public class Space extends Subject {
      */
     public void addConveyor(Heading heading){
 //        conveyor = new Conveyor(heading);
-        actions.add(new Conveyor(heading));
+        actions.add(new ConveyorBelt(heading));
     }
 
     /**
