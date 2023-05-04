@@ -33,6 +33,7 @@ public class Checkpoint extends FieldAction {
         if(space.getPlayer().getCheckpoints() >= gameController.board.getNumOfCheckpoints()){
             System.out.println("Player have all checkpoints"); //TODO: Player have satisfied win condition. Need to stop game.
         }
+        //TODO: The numOfCheckpoints in boards isn't currently being set. It should.
 
         return true;
     }

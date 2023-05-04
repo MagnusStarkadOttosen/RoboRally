@@ -30,6 +30,8 @@ import dk.dtu.compute.se.pisd.roborally.controller.Gear;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: Alot of things can be removed as they arn't used anymore.
+
 /**
  * ...
  *
@@ -139,7 +141,7 @@ public class Space extends Subject {
 
     /**
      * Adds a gear to the space.
-     * @param heading If WEST rotate player anti-clockwise, if EAST rotate clockwise.
+     * @param rotation The rotation the player is being turned.
      */
     public void addGear(Rotation rotation){
 //        gear = new Gear(rotation);

@@ -60,8 +60,7 @@ public class AppController implements Observer {
     private Board board;
 
     /**
-     * Prompts user for amount of players and creates a board.
-     * Currently, a temp board.
+     * Prompts user for amount of players and what map.
      */
     public void newGame() {
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
@@ -83,7 +82,7 @@ public class AppController implements Observer {
             mapChoice.setHeaderText("Select map");
             Optional<String> mapResult = mapChoice.showAndWait();
 
-            System.out.println(mapResult.get());
+//            System.out.println(mapResult.get());
 
             board = LoadBoard.loadBoard(mapResult.get());
 
@@ -126,8 +125,9 @@ public class AppController implements Observer {
         }
     }
 
+    //TODO: Should save the players hand.
     /**
-     * This isn't implemented. Will take relevant data and store it, probably in a file.
+     * Saves the map and player position and rotation.
      */
     public void saveGame() {
         // XXX needs to be implemented eventually
@@ -142,9 +142,9 @@ public class AppController implements Observer {
 
     }
 
+    //TODO: A better way to choose what file to load.
     /**
-     * This isn't implemented. Will take relevant data from storage (file) and populate board.
-     * Currently just start new game.
+     * Loads the game from a file. The player have to input the file name manually.
      */
     public void loadGame() {
         // XXX needs to be implememted eventually
@@ -166,14 +166,7 @@ public class AppController implements Observer {
                 result = dialog.showAndWait();
             }while(!LoadBoard.filePresent(result.get()));
 
-
-
-
-
             System.out.println("File to load: " + result.get());
-
-
-
 
             board = LoadBoard.loadBoard(result.get());
             gameController = new GameController(board);
@@ -193,9 +186,10 @@ public class AppController implements Observer {
 
     }
 
+    //TODO: Temporarily removed the saving part. It should prompt the player.
     /**
-     * Stop playing the current game, giving the user the option to save
-     * the game or to cancel stopping the game. The method returns true
+     * Stop playing the current game, <strike>giving the user the option to save
+     * the game</strike> or to cancel stopping the game. The method returns true
      * if the game was successfully stopped (with or without saving the
      * game); returns false, if the current game was not stopped. In case
      * there is no current game, false is returned.

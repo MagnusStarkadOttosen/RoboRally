@@ -57,10 +57,18 @@ public class Board extends Subject {
 
     private boolean stepMode;
 
+    /**
+     *
+     * @return The number of checkpoints on the board
+     */
     public int getNumOfCheckpoints() {
         return numOfCheckpoints;
     }
 
+    /**
+     * Sets the number of checkpoints on the board.
+     * @param numOfCheckpoints
+     */
     public void setNumOfCheckpoints(int numOfCheckpoints) {
         this.numOfCheckpoints = numOfCheckpoints;
     }
@@ -289,6 +297,10 @@ public class Board extends Subject {
                 ", Step: " + getStep();
     }
 
+    /**
+     *
+     * @return list of all players.
+     */
     public List<Player> getPlayers() {
         return players;
     }

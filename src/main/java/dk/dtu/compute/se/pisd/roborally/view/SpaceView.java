@@ -139,6 +139,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
     }
 
+    //TODO: Needs cleaning.
     /**
      * Draws the player icons.
      */

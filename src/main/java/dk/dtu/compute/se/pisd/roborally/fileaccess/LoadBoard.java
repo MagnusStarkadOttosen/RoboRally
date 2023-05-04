@@ -43,10 +43,17 @@ import java.io.*;
  */
 public class LoadBoard {
 
+    //TODO: The variable numOfCheckpoints in boards should be set be the loadBoard method.
+
     private static final String BOARDSFOLDER = "boards";
     private static final String DEFAULTBOARD = "defaultboard";
     private static final String JSON_EXT = "json";
 
+    /**
+     * This loads the game from a json file.
+     * @param boardname Name of the file to load
+     * @return The board that is loaded from the file.
+     */
     public static Board loadBoard(String boardname) {
         if (boardname == null) {
             boardname = DEFAULTBOARD;
@@ -107,6 +114,11 @@ public class LoadBoard {
 		return null;
     }
 
+    /**
+     * This saves the board to a json file.
+     * @param board The board that is going to be saved.
+     * @param name The name of the save.
+     */
     public static void saveBoard(Board board, String name) {
         BoardTemplate template = new BoardTemplate();
         template.width = board.width;
@@ -191,6 +203,12 @@ public class LoadBoard {
         }
     }
 
+    //TODO: Probably a better way to do it.
+    /**
+     *
+     * @param boardname Name of the file to test.
+     * @return whether the file is present or not
+     */
     public static boolean filePresent(String boardname){
         ClassLoader classLoader = LoadBoard.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
