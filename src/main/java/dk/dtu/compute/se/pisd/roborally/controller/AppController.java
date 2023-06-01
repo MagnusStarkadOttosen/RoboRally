@@ -248,4 +248,11 @@ public class AppController implements Observer {
         // XXX do nothing for now
     }
 
+    public void host(){
+        System.out.println("hosting");
+    }
+
+    public void join(){
+        System.out.println("Joining");
+    }
 }
