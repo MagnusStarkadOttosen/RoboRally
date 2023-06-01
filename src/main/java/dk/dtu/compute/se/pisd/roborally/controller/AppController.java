@@ -28,6 +28,7 @@ import dk.dtu.compute.se.pisd.roborally.RoboRally;
 
 import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.*;
+import dk.dtu.compute.se.pisd.roborally.webApplication.*;
 
 import javafx.application.Platform;
 import javafx.scene.control.*;
@@ -250,6 +251,8 @@ public class AppController implements Observer {
 
     public void host(){
         System.out.println("hosting");
+        SpringAPIApplication.startSpring();
+
     }
 
     public void join(){
