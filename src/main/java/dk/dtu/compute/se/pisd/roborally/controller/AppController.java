@@ -169,7 +169,7 @@ public class AppController implements Observer {
 
             System.out.println("File to load: " + result.get());
 
-            board = LoadBoard.loadBoard(result.get());
+            board = LoadBoard.loadSavedGame(result.get());
             gameController = new GameController(board);
 //            int no = result.get();
 //            for (int i = 0; i < no; i++) {
@@ -178,7 +178,7 @@ public class AppController implements Observer {
 //                player.setSpace(board.getSpace(i % board.width, i));
 //            }
 
-            gameController.startProgrammingPhase();
+            //gameController.startProgrammingPhase();
 
             roboRally.createBoardView(gameController);
         }
