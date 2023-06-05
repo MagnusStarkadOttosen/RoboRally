@@ -112,7 +112,6 @@ public class RoboRallyMenuBar extends MenuBar {
             loadGame.setVisible(false);
             host.setVisible(false);
             join.setVisible(false);
-            multiplayerMenu.setVisible(false);
         } else {
             newGame.setVisible(true);
             stopGame.setVisible(false);
@@ -120,7 +119,6 @@ public class RoboRallyMenuBar extends MenuBar {
             loadGame.setVisible(true);
             host.setVisible(true);
             join.setVisible(true);
-            multiplayerMenu.setVisible(true);
         }
     }
 
