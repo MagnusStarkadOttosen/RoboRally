@@ -78,7 +78,7 @@ public class AppController implements Observer {
                 }
             }
 
-            ChoiceDialog<String> mapChoice = new ChoiceDialog<>("map1", "map1", "map2", "map3");
+            ChoiceDialog<String> mapChoice = new ChoiceDialog<>("map1", "map1", "map2", "map3","map4");
             mapChoice.setTitle("Select map");
             mapChoice.setHeaderText("Select map");
             Optional<String> mapResult = mapChoice.showAndWait();
