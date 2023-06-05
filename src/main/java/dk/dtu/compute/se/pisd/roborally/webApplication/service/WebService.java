@@ -1,5 +1,6 @@
 package dk.dtu.compute.se.pisd.roborally.webApplication.service;
 
+import dk.dtu.compute.se.pisd.roborally.webApplication.api.model.MultiplayerGameSettings;
 import dk.dtu.compute.se.pisd.roborally.webApplication.api.model.testUser;
 import org.springframework.stereotype.Service;
 
@@ -8,15 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * For testing
- */
 @Service
-public class testUserService {
-
+public class WebService {
     private List<testUser> userList;
+    private String temp = "temp1";
 
-    public testUserService(){
+    public WebService(){
         userList = new ArrayList<>();
 
         testUser user1 = new testUser(1, "test1", 5);
@@ -38,4 +36,14 @@ public class testUserService {
         }
         return optional;
     }
+
+    public boolean setMapName(String name) {
+        temp = name;
+        return true;
+    }
+
+    public String getMapName(){
+        return temp;
+    }
+
 }

@@ -30,6 +30,9 @@ import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import dk.dtu.compute.se.pisd.roborally.webApplication.*;
 
+import dk.dtu.compute.se.pisd.roborally.webApplication.api.controller.WebController;
+import dk.dtu.compute.se.pisd.roborally.webApplication.api.model.MultiplayerGameSettings;
+import dk.dtu.compute.se.pisd.roborally.webApplication.service.WebService;
 import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -251,11 +254,65 @@ public class AppController implements Observer {
 
     public void host(){
         System.out.println("hosting");
+
         SpringAPIApplication.startSpring();
+
+        newMultiGame();
+
+
 
     }
 
     public void join(){
         System.out.println("Joining");
+        System.out.println("id 1: " + Client.getUserById(1));
+        System.out.println("id 2: " + Client.getUserById(2));
+
+        System.out.println("map name: " + Client.getMapName());
+
     }
+
+    public void newMultiGame(){
+        ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
+        dialog.setTitle("Player number");
+        dialog.setHeaderText("Select number of players");
+        Optional<Integer> playerAmount = dialog.showAndWait();
+
+        if (playerAmount.isPresent()) {
+            if (gameController != null) {
+                // The UI should not allow this, but in case this happens anyway.
+                // give the user the option to save the game or abort this operation!
+                if (!stopGame()) {
+                    return;
+                }
+            }
+
+            ChoiceDialog<String> mapChoice = new ChoiceDialog<>("map1", "map1", "map2", "map3","map4");
+            mapChoice.setTitle("Select map");
+            mapChoice.setHeaderText("Select map");
+            Optional<String> mapResult = mapChoice.showAndWait();
+
+            board = LoadBoard.loadBoard(mapResult.get());
+
+            System.out.println("Map set: " + Client.setMapName(mapResult.get()) + " with name: " + mapResult.get());
+
+            // XXX the board should eventually be created programmatically or loaded from a file
+            //     here we just create an empty board with the required number of players.
+            //board = new Board(8,8);
+            gameController = new GameController(board);
+            int no = playerAmount.get();
+            for (int i = 0; i < no; i++) {
+                Player player = new Player(board, PLAYER_COLORS.get(i), "Player " + (i + 1));
+                board.addPlayer(player);
+                player.setSpace(board.getSpace(i % board.width, i));
+            }
+
+            // XXX: V2
+            // board.setCurrentPlayer(board.getPlayer(0));
+            gameController.startProgrammingPhase();
+
+            roboRally.createBoardView(gameController);
+        }
+    }
+
 }

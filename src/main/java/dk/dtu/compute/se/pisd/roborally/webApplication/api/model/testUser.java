@@ -1,5 +1,8 @@
 package dk.dtu.compute.se.pisd.roborally.webApplication.api.model;
 
+/**
+ * For testing
+ */
 public class testUser {
 
     private int id;
