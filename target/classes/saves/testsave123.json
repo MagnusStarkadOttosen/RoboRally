@@ -1,0 +1,106 @@
+{
+  "mapName": "map2",
+  "phase": "PROGRAMMING",
+  "step": 0,
+  "currentPlayer": 0,
+  "players": [
+    {
+      "playerName": "Player 1",
+      "color": "red",
+      "playerHeading": "SOUTH",
+      "checkpoints": 0,
+      "program": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "cards": [
+        {
+          "command": "OPTION_LEFT_RIGHT",
+          "observers": []
+        },
+        {
+          "command": "SPEED_ROUTINE",
+          "observers": []
+        },
+        {
+          "command": "FORWARD",
+          "observers": []
+        },
+        {
+          "command": "WEASEL_ROUTINE",
+          "observers": []
+        },
+        {
+          "command": "WEASEL_ROUTINE",
+          "observers": []
+        },
+        {
+          "command": "FAST_FORWARD",
+          "observers": []
+        },
+        {
+          "command": "U_TURN",
+          "observers": []
+        },
+        {
+          "command": "MOVE3_FORWARD",
+          "observers": []
+        }
+      ],
+      "x": 0,
+      "y": 0
+    },
+    {
+      "playerName": "Player 2",
+      "color": "green",
+      "playerHeading": "SOUTH",
+      "checkpoints": 0,
+      "program": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "cards": [
+        {
+          "command": "RIGHT",
+          "observers": []
+        },
+        {
+          "command": "SPAM_CARD",
+          "observers": []
+        },
+        {
+          "command": "OPTION_LEFT_RIGHT",
+          "observers": []
+        },
+        {
+          "command": "FAST_FORWARD",
+          "observers": []
+        },
+        {
+          "command": "OPTION_LEFT_RIGHT",
+          "observers": []
+        },
+        {
+          "command": "Backwards",
+          "observers": []
+        },
+        {
+          "command": "SANDBOX_ROUTINE",
+          "observers": []
+        },
+        {
+          "command": "SPEED_ROUTINE",
+          "observers": []
+        }
+      ],
+      "x": 1,
+      "y": 1
+    }
+  ]
+}

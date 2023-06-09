@@ -21,6 +21,7 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
+import com.google.gson.Gson;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Observer;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
@@ -30,8 +31,8 @@ import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import dk.dtu.compute.se.pisd.roborally.webApplication.*;
 
-import dk.dtu.compute.se.pisd.roborally.webApplication.api.controller.WebController;
-import dk.dtu.compute.se.pisd.roborally.webApplication.api.model.MultiplayerGameSettings;
+
+import dk.dtu.compute.se.pisd.roborally.webApplication.service.IWebService;
 import dk.dtu.compute.se.pisd.roborally.webApplication.service.WebService;
 import javafx.application.Platform;
 import javafx.scene.control.*;
@@ -252,23 +253,81 @@ public class AppController implements Observer {
         // XXX do nothing for now
     }
 
+    IWebService webService;
+
     public void host(){
         System.out.println("hosting");
 
+        webService = new WebService();
+
+//        MultiPlayerController multiPlayerController = new MultiPlayerController(this, roboRally);
+//        multiPlayerController.startServer();
+
+//
+        newMultiGame();
         SpringAPIApplication.startSpring();
 
-        newMultiGame();
 
 
-
+        webService.testBoard();
     }
 
     public void join(){
         System.out.println("Joining");
-        System.out.println("id 1: " + Client.getUserById(1));
-        System.out.println("id 2: " + Client.getUserById(2));
 
-        System.out.println("map name: " + Client.getMapName());
+
+        //System.out.println(Client.getMapName());
+
+
+
+        int playerNum = Client.permToJoin();
+        System.out.println("playerNum: " + playerNum);
+        //System.out.println(Client.getMapName());
+        if(playerNum != -1){
+
+
+
+            board = LoadBoard.loadBoard(Client.getMapName());
+            System.out.println("test1");
+
+            Player player = new Player(board, PLAYER_COLORS.get(playerNum), "Player " + playerNum);
+            player.setSpace(board.getSpace(playerNum, playerNum));
+            Client.addPlayer(player);
+            System.out.println("test2");
+            Client.getAllPlayers(board);
+            System.out.println("test3");
+            board.setCurrentPlayer(board.getPlayer(0));
+            System.out.println("test4");
+            board.setPhase(Client.getPhase());
+            System.out.println("test5");
+
+            System.out.println(board.getCurrentPlayer().getName());
+
+
+        }
+
+
+
+
+//        MultiPlayerController multiPlayerController = new MultiPlayerController(this, roboRally);
+//        multiPlayerController.joinServer();
+
+
+//        System.out.println("id 1: " + Client.getUserById(1));
+//        System.out.println("id 2: " + Client.getUserById(2));
+//
+//        String mapName = Client.getMapName();
+//        System.out.println("map name: " + mapName);
+//
+//        board = LoadBoard.loadSavedGame(mapName);
+
+
+
+
+
+
+        gameController = new GameController(board);
+        roboRally.createBoardView(gameController);
 
     }
 
@@ -279,6 +338,7 @@ public class AppController implements Observer {
         Optional<Integer> playerAmount = dialog.showAndWait();
 
         if (playerAmount.isPresent()) {
+            webService.setMaxPlayers(playerAmount.get());
             if (gameController != null) {
                 // The UI should not allow this, but in case this happens anyway.
                 // give the user the option to save the game or abort this operation!
@@ -294,24 +354,18 @@ public class AppController implements Observer {
 
             board = LoadBoard.loadBoard(mapResult.get());
 
+            webService.addBoard(board);
+
             System.out.println("Map set: " + Client.setMapName(mapResult.get()) + " with name: " + mapResult.get());
 
-            // XXX the board should eventually be created programmatically or loaded from a file
-            //     here we just create an empty board with the required number of players.
-            //board = new Board(8,8);
-            gameController = new GameController(board);
-            int no = playerAmount.get();
-            for (int i = 0; i < no; i++) {
-                Player player = new Player(board, PLAYER_COLORS.get(i), "Player " + (i + 1));
-                board.addPlayer(player);
-                player.setSpace(board.getSpace(i % board.width, i));
+            int playerNum = webService.permToJoin();
+            if(playerNum != -1){
+                Player player = new Player(board, PLAYER_COLORS.get(playerNum), "Player " + (playerNum+1));
+                webService.addPlayerDirect(player);
             }
 
-            // XXX: V2
-            // board.setCurrentPlayer(board.getPlayer(0));
-            gameController.startProgrammingPhase();
+            webService.temp(roboRally);
 
-            roboRally.createBoardView(gameController);
         }
     }
 
