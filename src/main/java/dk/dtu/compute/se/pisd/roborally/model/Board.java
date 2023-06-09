@@ -305,4 +305,9 @@ public class Board extends Subject {
         return players;
     }
 
+    public void addAllPlayers(List<Player> players){
+        this.players.addAll(players);
+        notifyChange();
+    }
+
 }
