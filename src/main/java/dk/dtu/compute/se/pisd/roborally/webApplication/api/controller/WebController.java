@@ -107,4 +107,34 @@ public class WebController {
         Phase phase = webService.getPhase();
         return ResponseEntity.ok().body(phase);
     }
+
+    @GetMapping("/maxPlayers")
+    public int getMaxPlayers(){
+        int player = webService.getMaxPlayers();
+        return player;
+    }
+
+    @GetMapping("/amountOfPlayers")
+    public int getAmountOfPlayers(){
+        int player = webService.getAmountOfPlayers();
+        return player;
+    }
+
+    @GetMapping("/currentPlayerIndex")
+    public int getCurrentPlayerIndex(){
+        int player = webService.getCurrentPlayerIndex();
+        return player;
+    }
+
+    @PostMapping("/ready")
+    public ResponseEntity<String > addPlayer(@RequestBody int playerNum) {
+
+        boolean added = webService.playersReady(playerNum);
+        if(added)
+            return ResponseEntity.ok().body("added");
+        else
+            return ResponseEntity.internalServerError().body("not added");
+
+    }
+
 }

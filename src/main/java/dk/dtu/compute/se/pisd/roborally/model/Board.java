@@ -143,7 +143,13 @@ public class Board extends Subject {
      * @param player
      */
     public void addPlayer(@NotNull Player player) {
-        if (player.board == this && !players.contains(player)) {
+        boolean dupName = false;
+        for (Player p:players) {
+            if(p.getName().equals(player.getName())){
+                dupName = true;
+            }
+        }
+        if (player.board == this && !players.contains(player) && !dupName) {
             players.add(player);
             notifyChange();
         }

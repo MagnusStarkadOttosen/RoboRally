@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
+import dk.dtu.compute.se.pisd.roborally.webApplication.Client;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -33,6 +34,26 @@ import java.util.List;
  *
  */
 public class GameController {
+
+    public boolean isGameIsMultiplayer() {
+        return gameIsMultiplayer;
+    }
+
+    public void setGameIsMultiplayer(boolean gameIsMultiplayer) {
+        this.gameIsMultiplayer = gameIsMultiplayer;
+    }
+
+    public int getPlayerNum() {
+        return playerNum;
+    }
+
+    public void setPlayerNum(int playerNum) {
+        this.playerNum = playerNum;
+    }
+
+    private int playerNum;
+
+    private boolean gameIsMultiplayer = false;
 
     final public Board board;
 
@@ -561,5 +582,15 @@ public class GameController {
             }
         }
         continuePrograms();
+    }
+
+    public void playerFinishedProgramming() {
+        makeProgramFieldsInvisible();
+        makeProgramFieldsVisible(0);
+        board.setPhase(Phase.WAITING);
+        board.setCurrentPlayer(board.getPlayer(0));
+        board.setStep(0);
+
+        Client.playerFinishedProgramming(playerNum);
     }
 }

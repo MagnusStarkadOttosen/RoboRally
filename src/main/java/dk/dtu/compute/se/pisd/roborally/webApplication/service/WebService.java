@@ -53,7 +53,7 @@ public class WebService implements IWebService{
 
     @Override
     public String getMapName(){
-        System.out.println("test from webservice");
+//        System.out.println("test from webservice");
 //        System.out.println("test: " + this.board.boardName);
 
         return board.boardName;
@@ -103,7 +103,7 @@ public class WebService implements IWebService{
 
         Gson gson = new Gson();
         String temp = gson.toJson(template);
-        System.out.println("temp: " + temp);
+//        System.out.println("temp: " + temp);
         return temp;
     }
 
@@ -129,13 +129,45 @@ public class WebService implements IWebService{
 
         Gson gson = new Gson();
         String temp = gson.toJson(playerTemplate);
-        System.out.println("temp: " + temp);
+//        System.out.println("temp: " + temp);
         return temp;
     }
 
     @Override
     public Phase getPhase() {
         return board.getPhase();
+    }
+
+    @Override
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
+
+    @Override
+    public int getAmountOfPlayers() {
+        return board.getPlayers().size();
+    }
+
+    @Override
+    public int getCurrentPlayerIndex() {
+//        System.out.println("getCurrentPlayerIndex");
+//        System.out.println("board size: " + board.getPlayers().size());
+
+
+
+
+        return board.getPlayers().indexOf(board.getCurrentPlayer());
+    }
+
+    private boolean[] readyPlayers;
+
+
+    @Override
+    public boolean playersReady(int playerNum) {
+
+        readyPlayers[playerNum] = true;
+
+        return true;
     }
 
     public void addBoard(Board board){
@@ -145,6 +177,12 @@ public class WebService implements IWebService{
 
     public void setMaxPlayers(int max){
         maxPlayers = max;
+
+        readyPlayers = new boolean[maxPlayers];
+        for (int i = 0; i < maxPlayers; i++) {
+            readyPlayers[i] = false;
+        }
+
         System.out.println("MaxPlayers set to: " + max);
     }
 
@@ -172,7 +210,17 @@ public class WebService implements IWebService{
             player.setCheckpoints(playerTemplate.checkpoints);
             board.addPlayer(player);
             space.setPlayer(player);
+
+            if(board.getCurrentPlayer() == null){
+                board.setCurrentPlayer(player);
+            }
+
         }
+
+        if(board.getPlayers().size() == maxPlayers){
+            board.setPhase(Phase.PROGRAMMING);
+        }
+
 //        board.addPlayer(player);
 //        player.setSpace(board.getSpace(board.getPlayers().size() % board.width, 0));
         return true;
@@ -188,7 +236,23 @@ public class WebService implements IWebService{
 
     public void temp(@NotNull RoboRally roboRally){
         gameController = new GameController(board);
-        System.out.println(board.getPlayer(0).getName());
+//        System.out.println(board.getPlayer(0).getName());
+
+
+//        MultiThreading multiThreading = new MultiThreading();
+//        Thread myThread = new Thread(multiThreading);
+//        myThread.start();
+//
+////        while (board.getPlayers().size() != maxPlayers){
+//////            try {
+//////                wait(10000);
+//////            } catch (InterruptedException e) {
+//////                throw new RuntimeException(e);
+//////            }
+////            System.out.println("waiting on players: " + board.getPlayers().size() + "/" + maxPlayers);
+////        }
+
+
         gameController.startProgrammingPhase();
         roboRally.createBoardView(gameController);
     }
