@@ -25,4 +25,12 @@ public interface IWebService {
     String getCurrentPlayer();
 
     Phase getPhase();
+
+    int getMaxPlayers();
+
+    int getAmountOfPlayers();
+
+    int getCurrentPlayerIndex();
+
+    boolean playersReady(int playerNum);
 }

@@ -11,12 +11,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class Client {
 
@@ -59,19 +55,19 @@ public class Client {
 
 
     public static String getMapName(){
-        System.out.println("testing1");
+//        System.out.println("testing1");
         try{
-            System.out.println("testing2");
+//            System.out.println("testing2");
             HttpRequest request = HttpRequest.newBuilder()
                     .GET()
                     .uri(URI.create("http://localhost:8080/map"))
                     .setHeader("User-Agent", "Product Client")
                     .header("Content-Type", "application/json")
                     .build();
-            System.out.println("testing3");
+//            System.out.println("testing3");
             CompletableFuture<HttpResponse<String>> response =
                     httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("testing4");
+//            System.out.println("testing4");
             String result = response.thenApply((r)->r.body()).get(5, TimeUnit.SECONDS);
             System.out.println("testing5: " + result);
             return result;
@@ -100,9 +96,6 @@ public class Client {
     }
 
     public static boolean addPlayer(Player p) {
-
-
-
         try{
 //            String productJSON = new Gson().toJson(p);
 //            System.out.println(productJSON);
@@ -169,7 +162,7 @@ public class Client {
                     httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
             String result = response.thenApply((r)->r.body()).get(5, TimeUnit.SECONDS);
 
-            System.out.println("result getAllPlayers: " + result);
+//            System.out.println("result getAllPlayers: " + result);
             Gson gson = new Gson();
 
             AllPlayersTemplate template = gson.fromJson(result, AllPlayersTemplate.class);
@@ -244,4 +237,72 @@ public class Client {
         }
     }
 
+    public static int getMaxPlayers(){
+        try{
+            HttpRequest request = HttpRequest.newBuilder()
+                    .GET()
+                    .uri(URI.create("http://localhost:8080/maxPlayers"))
+                    .setHeader("User-Agent", "Product Client")
+                    .header("Content-Type", "application/json")
+                    .build();
+            CompletableFuture<HttpResponse<String>> response =
+                    httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+            String result = response.thenApply((r)->r.body()).get(5, TimeUnit.SECONDS);
+            return Integer.parseInt(result);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    public static int getCurrentAmountOfPlayers(){
+        try{
+            HttpRequest request = HttpRequest.newBuilder()
+                    .GET()
+                    .uri(URI.create("http://localhost:8080/amountOfPlayers"))
+                    .setHeader("User-Agent", "Product Client")
+                    .header("Content-Type", "application/json")
+                    .build();
+            CompletableFuture<HttpResponse<String>> response =
+                    httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+            String result = response.thenApply((r)->r.body()).get(5, TimeUnit.SECONDS);
+            return Integer.parseInt(result);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    public static int getCurrentPlayerIndex(){
+        try{
+            HttpRequest request = HttpRequest.newBuilder()
+                    .GET()
+                    .uri(URI.create("http://localhost:8080/currentPlayerIndex"))
+                    .setHeader("User-Agent", "Product Client")
+                    .header("Content-Type", "application/json")
+                    .build();
+            CompletableFuture<HttpResponse<String>> response =
+                    httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+            String result = response.thenApply((r)->r.body()).get(5, TimeUnit.SECONDS);
+            return Integer.parseInt(result);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    public static boolean playerFinishedProgramming(int playerNum) {
+        try{
+            String productJSON = new Gson().toJson(playerNum);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .POST(HttpRequest.BodyPublishers.ofString(productJSON))
+                    .uri(URI.create("http://localhost:8080/ready"))
+                    .setHeader("User-Agent", "Product Client")
+                    .header("Content-Type", "application/json")
+                    .build();
+            CompletableFuture<HttpResponse<String>> response =
+                    httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+            String result = response.thenApply((r)->r.body()).get(5, TimeUnit.SECONDS);
+            return result.equals("added")? true : false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
