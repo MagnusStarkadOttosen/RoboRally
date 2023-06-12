@@ -208,6 +208,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      * Draws the action field on the space. Action field include conveyor, gear and checkpoints.
      */
     private void drawActionField(){
+        SpaceView spaceView = new SpaceView(this.space);
         List<FieldAction> actions = space.getActions();
 
         for (FieldAction action:
@@ -226,12 +227,17 @@ public class SpaceView extends StackPane implements ViewObserver {
                 this.getChildren().add(arrow);
             }
             if (action.getClass() == Gear.class) {
+                String path;
                 Circle circle = new Circle(SPACE_WIDTH/2-5);
                 Text text = new Text();
                 circle.setStrokeWidth(5);
                 if(((Gear) action).getRotation() == Rotation.AntiClockwise){
-                    circle.setStroke(Color.GRAY);
-                    text.setText("Anti-\nClockwise");
+                    path = this.getClass().getResource("src/main/resources/image/").toString() + "counterclockwise.png";
+//                    circle.setStroke(Color.GRAY);
+//                    text.setText("Anti-\nClockwise");
+                    spaceView.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
+
+
                 }else{
                     circle.setStroke(Color.GREEN);
                     text.setText("Clockwise");
