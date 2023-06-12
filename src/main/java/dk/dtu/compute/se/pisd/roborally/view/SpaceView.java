@@ -30,14 +30,9 @@ import dk.dtu.compute.se.pisd.roborally.model.*;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -120,20 +115,33 @@ public class SpaceView extends StackPane implements ViewObserver {
      * Draws the wall icons.
      */
     private void drawWalls(){
+
         List<Heading> walls = space.getWalls();
+        StringBuilder styleBuilder = new StringBuilder();
         for (Heading wall : walls) {
-            Pane pane = new Pane();
-            Line line;
+            String path = null;
             switch(wall){
-                case EAST -> line = new Line(SPACE_WIDTH-2,2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
-                case WEST -> line = new Line(2,2,2,SPACE_HEIGHT-2);
-                case NORTH -> line = new Line(2,2,SPACE_WIDTH-2,2);
-                default -> line = new Line(2,SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+                case EAST -> path = Objects.requireNonNull(this.getClass().getResource("/image/wallEast.png")).toExternalForm();
+                case NORTH -> path = Objects.requireNonNull(this.getClass().getResource("/image/wallNorth.png")).toExternalForm();
+                case WEST -> path = Objects.requireNonNull(this.getClass().getResource("/image/wallWest.png")).toExternalForm();
+                case SOUTH -> path = Objects.requireNonNull(this.getClass().getResource("/image/wallSouth.png")).toExternalForm();
             }
-            line.setStrokeWidth(5);
-            line.setStroke(Color.YELLOW);
-            pane.getChildren().add(line);
-            this.getChildren().add(pane);
+
+            this.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:bottom bottom;");
+
+
+//            Pane pane = new Pane();
+//            Line line;
+//            switch(wall){
+//                case EAST -> line = new Line(SPACE_WIDTH-2,2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+//                case WEST -> line = new Line(2,2,2,SPACE_HEIGHT-2);
+//                case NORTH -> line = new Line(2,2,SPACE_WIDTH-2,2);
+//                default -> line = new Line(2,SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+//            }
+//            line.setStrokeWidth(5);
+//            line.setStroke(Color.YELLOW);
+//            pane.getChildren().add(line);
+//            this.getChildren().add(pane);
         }
     }
 
@@ -254,19 +262,13 @@ public class SpaceView extends StackPane implements ViewObserver {
             if(action.getClass() == Checkpoint.class){
                 // have to be fixed
                 int number = Checkpoint.getNumber();
-                String path;
-                 path = Objects.requireNonNull(this.getClass().getResource("/image/Check1.png")).toExternalForm();
+                String path = Objects.requireNonNull(this.getClass().getResource("/image/Check1.png")).toExternalForm();
                 switch(number){
-                    case 2 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check2.png")).toExternalForm();
-                    case 3 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check3.png")).toExternalForm();
-                    case 4 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check4.png")).toExternalForm();
+                    case 1 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check2.png")).toExternalForm();
+                    case 2 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check3.png")).toExternalForm();
+                    case 3 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check4.png")).toExternalForm();
                 }
                 this.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
-
-
-
-
-
 
 //                Circle circle = new Circle(SPACE_WIDTH/2-5);
 //                Text text = new Text();
