@@ -65,7 +65,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.setMinHeight(SPACE_HEIGHT);
         this.setMaxHeight(SPACE_HEIGHT);
         path = getClass().getResource("/image/img.png").toExternalForm();
-        this.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
+        this.setStyle("-fx-background-image: url(/image/img.png),url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
         // updatePlayer();
 
@@ -117,7 +117,6 @@ public class SpaceView extends StackPane implements ViewObserver {
     private void drawWalls(){
 
         List<Heading> walls = space.getWalls();
-        StringBuilder styleBuilder = new StringBuilder();
         for (Heading wall : walls) {
             String path = null;
             switch(wall){
@@ -127,7 +126,7 @@ public class SpaceView extends StackPane implements ViewObserver {
                 case SOUTH -> path = Objects.requireNonNull(this.getClass().getResource("/image/wallSouth.png")).toExternalForm();
             }
 
-            this.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:bottom bottom;");
+            this.setStyle("-fx-background-image:  url(/image/img.png),url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
 
 //            Pane pane = new Pane();
@@ -222,10 +221,10 @@ public class SpaceView extends StackPane implements ViewObserver {
              actions) {
             if (action.getClass() == ConveyorBelt.class) {
                 Polygon arrow = new Polygon(0.0, 0.0,
-                        SPACE_WIDTH/2-3, SPACE_HEIGHT-5,
-                        SPACE_HEIGHT-5, 0.0 );
+                        SPACE_WIDTH/2-3, SPACE_HEIGHT-9,
+                        SPACE_HEIGHT-9,0.0 );
                 try {
-                    arrow.setFill(Color.LIGHTBLUE);
+                    arrow.setFill(Color.BLUEVIOLET);
                 } catch (Exception e) {
                     arrow.setFill(Color.MEDIUMPURPLE);
                 }
@@ -242,12 +241,12 @@ public class SpaceView extends StackPane implements ViewObserver {
                     path = getClass().getResource("/image/counterclockwise.png").toExternalForm();
 //                    circle.setStroke(Color.GRAY);
 //                    text.setText("Anti-\nClockwise");
-                    this.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
+                    this.setStyle("-fx-background-image: url(/image/img.png),url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
 
                 }else{
                     path = getClass().getResource("/image/clockwise.png").toExternalForm();
-                    this.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
+                    this.setStyle("-fx-background-image: url(/image/img.png),url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
 
 //                    circle.setStroke(Color.GREEN);
@@ -268,7 +267,7 @@ public class SpaceView extends StackPane implements ViewObserver {
                     case 2 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check3.png")).toExternalForm();
                     case 3 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check4.png")).toExternalForm();
                 }
-                this.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
+                this.setStyle("-fx-background-image: url(/image/img.png),url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
 //                Circle circle = new Circle(SPACE_WIDTH/2-5);
 //                Text text = new Text();
