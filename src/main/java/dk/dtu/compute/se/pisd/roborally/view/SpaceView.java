@@ -206,6 +206,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      */
     private void drawActionField(){
 
+
         List<FieldAction> actions = space.getActions();
 
         for (FieldAction action:
@@ -225,25 +226,29 @@ public class SpaceView extends StackPane implements ViewObserver {
             }
             if (action.getClass() == Gear.class) {
                 String path;
-                Circle circle = new Circle(SPACE_WIDTH/2-5);
-                Text text = new Text();
-                circle.setStrokeWidth(5);
+//                Circle circle = new Circle(SPACE_WIDTH/2-5);
+//                Text text = new Text();
+//                circle.setStrokeWidth(5);
                 if(((Gear) action).getRotation() == Rotation.AntiClockwise){
-//                    path = this.getClass().getResource("src/main/resources/image/").toString() + "counterclockwise.png";
+                    path = getClass().getResource("/image/counterclockwise.png").toExternalForm();
 //                    circle.setStroke(Color.GRAY);
 //                    text.setText("Anti-\nClockwise");
-//                    spaceView.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
+                    this.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
 
                 }else{
-                    circle.setStroke(Color.GREEN);
-                    text.setText("Clockwise");
-                }
-                text.setFont(Font.font(8));
-                text.setStroke(Color.ORANGE);
+                    path = getClass().getResource("/image/clockwise.png").toExternalForm();
+                    this.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
-                this.getChildren().add(circle);
-                this.getChildren().add(text);
+
+//                    circle.setStroke(Color.GREEN);
+//                    text.setText("Clockwise");
+                }
+//                text.setFont(Font.font(8));
+//                text.setStroke(Color.ORANGE);
+//
+//                this.getChildren().add(this);
+//                this.getChildren().add(text);
             }
             if(action.getClass() == Checkpoint.class){
                 Circle circle = new Circle(SPACE_WIDTH/2-5);
