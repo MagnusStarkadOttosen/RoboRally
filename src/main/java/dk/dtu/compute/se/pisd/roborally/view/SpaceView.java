@@ -41,6 +41,7 @@ import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 //TODO: the current icons should be changed to images
 /**
  * What is drawn on each space.
@@ -251,17 +252,33 @@ public class SpaceView extends StackPane implements ViewObserver {
 //                this.getChildren().add(text);
             }
             if(action.getClass() == Checkpoint.class){
-                Circle circle = new Circle(SPACE_WIDTH/2-5);
-                Text text = new Text();
-                circle.setStrokeWidth(5);
-                circle.setStroke(Color.YELLOW);
-                text.setText(String.valueOf(((Checkpoint) action).getNumber()));
+                // have to be fixed
+                int number = Checkpoint.getNumber();
+                String path;
+                 path = Objects.requireNonNull(this.getClass().getResource("/image/Check1.png")).toExternalForm();
+                switch(number){
+                    case 2 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check2.png")).toExternalForm();
+                    case 3 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check3.png")).toExternalForm();
+                    case 4 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check4.png")).toExternalForm();
+                }
+                this.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
-                text.setFont(Font.font(10));
-                text.setStroke(Color.ORANGE);
 
-                this.getChildren().add(circle);
-                this.getChildren().add(text);
+
+
+
+
+//                Circle circle = new Circle(SPACE_WIDTH/2-5);
+//                Text text = new Text();
+//                circle.setStrokeWidth(5);
+//                circle.setStroke(Color.YELLOW);
+//                text.setText(String.valueOf(((Checkpoint) action).getNumber()));
+//
+//                text.setFont(Font.font(10));
+//                text.setStroke(Color.ORANGE);
+//
+//                this.getChildren().add(circle);
+//                this.getChildren().add(text);
             }
         }
     }

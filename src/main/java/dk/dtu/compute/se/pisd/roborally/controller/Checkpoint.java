@@ -6,7 +6,7 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
  * The checkpoint is the goal of the game. The player that collects them all first wins.
  */
 public class Checkpoint extends FieldAction {
-    private int number;
+    private static int number;
 
     public Checkpoint(int number){
         this.number = number;
@@ -16,7 +16,7 @@ public class Checkpoint extends FieldAction {
      *
      * @return The number that is assigned the checkpoint.
      */
-    public int getNumber(){
+    public static int getNumber(){
         return number;
     }
 
