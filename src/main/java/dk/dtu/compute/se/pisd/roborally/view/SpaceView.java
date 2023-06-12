@@ -58,6 +58,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     public SpaceView(@NotNull Space space) {
         this.space = space;
+        String path;
 
         // XXX the following styling should better be done with styles
         this.setPrefWidth(SPACE_WIDTH);
@@ -67,12 +68,8 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.setPrefHeight(SPACE_HEIGHT);
         this.setMinHeight(SPACE_HEIGHT);
         this.setMaxHeight(SPACE_HEIGHT);
-
-        if ((space.x + space.y) % 2 == 0) {
-            this.setStyle("-fx-background-color: white;");
-        } else {
-            this.setStyle("-fx-background-color: black;");
-        }
+        path = getClass().getResource("/image/img.png").toExternalForm();
+        this.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
         // updatePlayer();
 
@@ -208,7 +205,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      * Draws the action field on the space. Action field include conveyor, gear and checkpoints.
      */
     private void drawActionField(){
-        SpaceView spaceView = new SpaceView(this.space);
+
         List<FieldAction> actions = space.getActions();
 
         for (FieldAction action:
@@ -232,10 +229,10 @@ public class SpaceView extends StackPane implements ViewObserver {
                 Text text = new Text();
                 circle.setStrokeWidth(5);
                 if(((Gear) action).getRotation() == Rotation.AntiClockwise){
-                    path = this.getClass().getResource("src/main/resources/image/").toString() + "counterclockwise.png";
+//                    path = this.getClass().getResource("src/main/resources/image/").toString() + "counterclockwise.png";
 //                    circle.setStroke(Color.GRAY);
 //                    text.setText("Anti-\nClockwise");
-                    spaceView.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
+//                    spaceView.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
 
                 }else{
