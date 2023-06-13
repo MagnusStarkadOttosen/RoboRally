@@ -4,6 +4,7 @@ package dk.dtu.compute.se.pisd.roborally.webApplication.api.controller;
 import com.google.gson.Gson;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.AllPlayersTemplate;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.PlayerTemplate;
+import dk.dtu.compute.se.pisd.roborally.model.CommandCardField;
 import dk.dtu.compute.se.pisd.roborally.model.Phase;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
@@ -63,24 +64,6 @@ public class WebController {
     @PostMapping("/addPlayer")
     public ResponseEntity<String > addPlayer(@RequestBody String player) {
 
-//        System.out.println("recieved String addPlayers: " + player);
-//        Gson gson = new Gson();
-//
-//        PlayerTemplate template = gson.fromJson(player, PlayerTemplate.class);
-//
-//        template
-//
-//
-//        for (PlayerTemplate playerTemplate: template.players) {
-//            Space space = board.getSpace(playerTemplate.x, playerTemplate.y);
-//            if(space != null){
-//                Player player = new Player(board, playerTemplate.color, playerTemplate.playerName, playerTemplate.program, playerTemplate.cards);
-//                player.setHeading(playerTemplate.playerHeading);
-//                player.setCheckpoints(playerTemplate.checkpoints);
-//                board.addPlayer(player);
-//                space.setPlayer(player);
-//            }
-//        }
         boolean added = webService.addPlayer(player);
         if(added)
             return ResponseEntity.ok().body("added");
@@ -127,9 +110,39 @@ public class WebController {
     }
 
     @PostMapping("/ready")
-    public ResponseEntity<String > addPlayer(@RequestBody int playerNum) {
+    public ResponseEntity<String > addReady(@RequestBody String programList) {
 
-        boolean added = webService.playersReady(playerNum);
+        boolean added = webService.playersReady(programList);
+        if(added)
+            return ResponseEntity.ok().body("added");
+        else
+            return ResponseEntity.internalServerError().body("not added");
+
+    }
+
+    @GetMapping("/getAllData")
+    public ResponseEntity<String> getAllData(){
+        String players = webService.findAllData();
+        return ResponseEntity.ok().body(players);
+    }
+
+
+    @GetMapping("/isProgFinished")
+    public boolean isProgFinished(){
+        boolean player = webService.isProgFinished();
+        return player;
+    }
+
+    @GetMapping("/isMovingFinished")
+    public boolean isMovingFinished(){
+        boolean player = webService.isMovingFinished();
+        return player;
+    }
+
+    @PostMapping("/updatePlayer")
+    public ResponseEntity<String > updatePlayer(@RequestBody String player) {
+
+        boolean added = webService.updatePlayer(player);
         if(added)
             return ResponseEntity.ok().body("added");
         else

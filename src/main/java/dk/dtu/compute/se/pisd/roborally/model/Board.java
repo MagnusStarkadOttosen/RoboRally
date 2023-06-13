@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.webApplication.Client;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -314,6 +315,10 @@ public class Board extends Subject {
     public void addAllPlayers(List<Player> players){
         this.players.addAll(players);
         notifyChange();
+    }
+
+    public void removeAllPlayers() {
+        players.removeAll(players);
     }
 
 }

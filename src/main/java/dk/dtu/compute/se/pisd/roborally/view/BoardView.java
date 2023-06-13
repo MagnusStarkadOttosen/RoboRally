@@ -124,4 +124,8 @@ public class BoardView extends VBox implements ViewObserver {
 
     }
 
+    public void updateBoard(){
+        playersView.updateBoard();
+    }
+
 }

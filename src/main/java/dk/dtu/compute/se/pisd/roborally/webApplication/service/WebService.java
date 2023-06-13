@@ -5,6 +5,7 @@ import dk.dtu.compute.se.pisd.roborally.RoboRally;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.AllPlayersTemplate;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.PlayerTemplate;
+import dk.dtu.compute.se.pisd.roborally.fileaccess.model.ProgramTemplate;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.SaveTemplate;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import dk.dtu.compute.se.pisd.roborally.webApplication.api.model.testUser;
@@ -159,15 +160,92 @@ public class WebService implements IWebService{
         return board.getPlayers().indexOf(board.getCurrentPlayer());
     }
 
-    private boolean[] readyPlayers;
+    private static boolean[] readyPlayers;
 
 
     @Override
-    public boolean playersReady(int playerNum) {
+    public boolean playersReady(String programList) {
 
+
+        System.out.println(programList);
+
+        Gson gson = new Gson();
+
+        ProgramTemplate template = gson.fromJson(programList, ProgramTemplate.class);
+
+        int playerNum = template.playerNum;
+        System.out.println("player " + playerNum + " Clicked finished");
         readyPlayers[playerNum] = true;
 
+        board.getPlayer(playerNum).setProgram(template.program);
+
+
+        boolean allPlayersReady = true;
+        for (boolean bool: readyPlayers) {
+            if(bool == false){
+                allPlayersReady = false;
+            }
+        }
+        System.out.println("allPlayersReady: " + allPlayersReady);
+
+        if(allPlayersReady){
+            Arrays.fill(readyPlayers, false);
+            allPlayersAreReady();
+        }
+
         return true;
+    }
+
+    private static GameController gameController;
+    @Override
+    public void createGameController() {
+        gameController = new GameController(board);
+    }
+
+    @Override
+    public String findAllData() {
+        SaveTemplate template = new SaveTemplate();
+
+        for (Player player: board.getPlayers()) {
+            Space space = player.getSpace();
+            PlayerTemplate playerTemplate = new PlayerTemplate();
+            playerTemplate.x = space.x;
+            playerTemplate.y = space.y;
+            playerTemplate.playerName = space.getPlayer().getName();
+            playerTemplate.color = space.getPlayer().getColor();
+            playerTemplate.playerHeading = space.getPlayer().getHeading();
+            playerTemplate.checkpoints = space.getPlayer().getCheckpoints();
+
+            for (CommandCardField card: space.getPlayer().getCardsList()) {
+                playerTemplate.cards.add(card.getCard());
+            }
+            for (CommandCardField card: space.getPlayer().getProgramList()) {
+                playerTemplate.program.add(card.getCard());
+            }
+            template.players.add(playerTemplate);
+        }
+
+        template.mapName = board.boardName;
+        template.phase = board.getPhase();
+        template.currentPlayer = board.getPlayers().indexOf(board.getCurrentPlayer());
+
+        Gson gson = new Gson();
+        String temp = gson.toJson(template);
+//        System.out.println("temp: " + temp);
+        return temp;
+    }
+
+    private static boolean isProgFinished = false;
+
+    @Override
+    public boolean isProgFinished() {
+        return isProgFinished;
+    }
+
+    private static boolean isMovingFinished = false;
+    @Override
+    public boolean isMovingFinished() {
+        return isMovingFinished;
     }
 
     public void addBoard(Board board){
@@ -179,8 +257,10 @@ public class WebService implements IWebService{
         maxPlayers = max;
 
         readyPlayers = new boolean[maxPlayers];
+        playerFinishedMoving = new boolean[maxPlayers];
         for (int i = 0; i < maxPlayers; i++) {
             readyPlayers[i] = false;
+            playerFinishedMoving[i] = false;
         }
 
         System.out.println("MaxPlayers set to: " + max);
@@ -218,7 +298,7 @@ public class WebService implements IWebService{
         }
 
         if(board.getPlayers().size() == maxPlayers){
-            board.setPhase(Phase.PROGRAMMING);
+            gameIsFull();
         }
 
 //        board.addPlayer(player);
@@ -226,13 +306,20 @@ public class WebService implements IWebService{
         return true;
     }
 
+    private void gameIsFull() {
+        isProgFinished = false;
+        gameController.startProgrammingPhase();
+
+
+//        board.setPhase(Phase.PROGRAMMING);
+
+    }
+
     public boolean addPlayerDirect(Player player){
         board.addPlayer(player);
         player.setSpace(board.getSpace(board.getPlayers().size() % board.width, 0));
         return true;
     }
-
-    private static GameController gameController;
 
     public void temp(@NotNull RoboRally roboRally){
         gameController = new GameController(board);
@@ -274,5 +361,84 @@ public class WebService implements IWebService{
         System.out.println("testing: " + board.boardName);
     }
 
+    public void allPlayersAreReady(){
 
+        isProgFinished = true;
+        isMovingFinished = false;
+
+        System.out.print("Player1 program: ");
+        for (CommandCardField commandCardField:board.getPlayer(0).getProgramList()) {
+            if(commandCardField.getCard() != null){
+                System.out.print(commandCardField.getCard().getName() + " ");
+            }else{
+                System.out.print("null ");
+            }
+        }
+        System.out.println();
+        System.out.print("Player2 program: ");
+        for (CommandCardField commandCardField:board.getPlayer(1).getProgramList()) {
+            if(commandCardField.getCard() != null){
+                System.out.print(commandCardField.getCard().getName() + " ");
+            }else{
+                System.out.print("null ");
+            }
+        }
+        System.out.println();
+
+
+        gameController.finishProgrammingPhase();
+        System.out.println("all players are ready");
+        System.out.println("player 1 x: " + board.getPlayer(0).getSpace().x + " y: " + board.getPlayer(0).getSpace().y + " rotation: " + board.getPlayer(0).getHeading());
+        System.out.println("player 2 x: " + board.getPlayer(1).getSpace().x + " y: " + board.getPlayer(1).getSpace().y + " rotation: " + board.getPlayer(1).getHeading());
+
+//        gameController.executePrograms();
+
+    }
+
+
+    private static boolean[] playerFinishedMoving;
+    @Override
+    public boolean updatePlayer(String playerStr) {
+
+        Gson gson = new Gson();
+        PlayerTemplate playerTemplate = gson.fromJson(playerStr, PlayerTemplate.class);
+
+        Space space = board.getSpace(playerTemplate.x, playerTemplate.y);
+        if(space != null){
+
+            for (Player player: board.getPlayers()) {
+                if(player.getName().equals(playerTemplate.playerName)){
+                    playerFinishedMoving[board.getPlayers().indexOf(player)] = true;
+
+                    System.out.println("player: " + board.getPlayers().indexOf(player));
+
+                    for (boolean bool:playerFinishedMoving) {
+                        System.out.println(bool);
+                    }
+
+                    player.setSpace(board.getSpace(playerTemplate.x, playerTemplate.y));
+                    player.setHeading(playerTemplate.playerHeading);
+                    player.setCheckpoints(playerTemplate.checkpoints);
+                }
+            }
+        }
+
+        boolean allPlayersReady = true;
+        for (boolean bool: playerFinishedMoving) {
+            if(bool == false){
+                allPlayersReady = false;
+            }
+        }
+        if(allPlayersReady){
+            Arrays.fill(playerFinishedMoving, false);
+
+            isMovingFinished = true;
+            isProgFinished = false;
+            gameController.startProgrammingPhase();
+        }
+        System.out.println("updatePlayer");
+        System.out.println("player 1 x: " + board.getPlayer(0).getSpace().x + " y: " + board.getPlayer(0).getSpace().y + " rotation: " + board.getPlayer(0).getHeading());
+        System.out.println("player 2 x: " + board.getPlayer(1).getSpace().x + " y: " + board.getPlayer(1).getSpace().y + " rotation: " + board.getPlayer(1).getHeading());
+        return true;
+    }
 }

@@ -263,31 +263,10 @@ public class AppController implements Observer {
 
         webService = new WebService();
 
-//        MultiPlayerController multiPlayerController = new MultiPlayerController(this, roboRally);
-//        multiPlayerController.startServer();
-
-//
         newMultiGame();
         SpringAPIApplication.startSpring();
 
-//        MultiThreading multiThreading = new MultiThreading(webService, roboRally);
-//        Thread myThread = new Thread(multiThreading);
-//        myThread.start();
-
-//        while (board.getPlayers().size() != maxPlayers){
-////            try {
-////                wait(10000);
-////            } catch (InterruptedException e) {
-////                throw new RuntimeException(e);
-////            }
-//            System.out.println("waiting on players: " + board.getPlayers().size() + "/" + maxPlayers);
-//        }
-
-
-//        webService.temp(roboRally);
-
-        join();
-
+//        join();
 
         webService.testBoard();
     }
@@ -297,37 +276,12 @@ public class AppController implements Observer {
     public void join(){
         System.out.println("Joining");
 
-
-        //System.out.println(Client.getMapName());
-
-
-
         playerNum = Client.permToJoin();
         System.out.println("playerNum: " + playerNum);
-        //System.out.println(Client.getMapName());
+
         if(playerNum != -1){
             gameJoined();
         }
-
-
-
-
-//        MultiPlayerController multiPlayerController = new MultiPlayerController(this, roboRally);
-//        multiPlayerController.joinServer();
-
-
-//        System.out.println("id 1: " + Client.getUserById(1));
-//        System.out.println("id 2: " + Client.getUserById(2));
-//
-//        String mapName = Client.getMapName();
-//        System.out.println("map name: " + mapName);
-//
-//        board = LoadBoard.loadSavedGame(mapName);
-
-
-//        gameController = new GameController(board);
-//        roboRally.createBoardView(gameController);
-
     }
 
     public void newMultiGame(){
@@ -355,14 +309,9 @@ public class AppController implements Observer {
             board = LoadBoard.loadBoard(mapResult.get());
 
             webService.addBoard(board);
+            webService.createGameController();
 
             System.out.println("Map set: " + Client.setMapName(mapResult.get()) + " with name: " + mapResult.get());
-
-//            int playerNum = webService.permToJoin();
-//            if(playerNum != -1){
-//                Player player = new Player(board, PLAYER_COLORS.get(playerNum), "Player " + (playerNum+1));
-//                webService.addPlayerDirect(player);
-//            }
         }
     }
 
@@ -376,89 +325,59 @@ public class AppController implements Observer {
         Client.addPlayer(player);
         System.out.println("Player created and send to server");
 
-        Client.getAllPlayers(board);
-        System.out.println("All players from server added to board");
+//        Client.getAllPlayers(board);
+//        Client.getAllData(board);
 
-        int temp = Client.getCurrentPlayerIndex();
-        System.out.println("current player index " + temp);
-        board.setCurrentPlayer(board.getPlayer(temp));
-        System.out.println("Current player set");
-
-//        System.out.println("player 1: " + board.getPlayer(0).getName());
-//        System.out.println("currPlayer: " + board.getCurrentPlayer().getName());
-
-        board.setPhase(Client.getPhase());
-        System.out.println("Phase set: " + Client.getPhase());
+//        roboRally.temp(playerNum);
 
 
+//        System.out.println("All players from server added to board");
+//
+//        int temp = Client.getCurrentPlayerIndex();
+//        System.out.println("current player index " + temp);
+//        board.setCurrentPlayer(board.getPlayer(temp));
+//        System.out.println("Current player set");
+//
+//        board.setPhase(Client.getPhase());
+//        System.out.println("Phase set: " + Client.getPhase());
 
         gameController = new GameController(board);
         gameController.setGameIsMultiplayer(true);
         gameController.setPlayerNum(playerNum);
         System.out.println("gameController created");
 
-
-
-
-//        MultiThreading multiThreading = new MultiThreading(board);
+//        MultiThreading multiThreading = new MultiThreading(board, playerNum, gameController, roboRally);
 //        Thread thread = new Thread(multiThreading);
-//        thread.run();
+//        thread.start();
 
-//        while(true){
-//            Client.getAllPlayers(board);
-//            board.setCurrentPlayer(board.getPlayer(Client.getCurrentPlayerIndex()));
-//            board.setPhase(Client.getPhase());
-//        }
-
+        while(Client.getPhase() == Phase.INITIALISATION){
+//            System.out.println("init");
+        }
+        System.out.println("all players in");
 
 
-//
-//        System.out.println("test2");
-//        Client.getAllPlayers(board);
-//        System.out.println("test3");
-//        board.setCurrentPlayer(board.getPlayer(0));
-//        System.out.println("test4");
-//        board.setPhase(Client.getPhase());
-//        System.out.println("test5");
-//
-//        System.out.println(board.getCurrentPlayer().getName());
-//
-
-
-//        ExecutorService service = Executors.newFixedThreadPool(10);
-//
-//        Future<Integer> future = service.submit(new MultiPlayerLoop(board));
-
-
-        MultiThreading multiThreading = new MultiThreading(board);
-        Thread thread = new Thread(multiThreading);
-        thread.start();
-//        Client.getAllPlayers(board);
-
+        Client.getAllData(board);
 
         roboRally.createBoardView(gameController);
         System.out.println("Board view created");
 
+
+//        MultiThreading multiThreading = new MultiThreading(board, playerNum, gameController, roboRally);
+//        Thread thread = new Thread(multiThreading);
+//        thread.start();
+
+        //Dont work freezes system
+//        while (Client.getPhase() == Phase.PROGRAMMING){
+//            System.out.println("prog");
+//        }
+//        while (Client.getPhase() == Phase.WAITING){
+//            System.out.println("wait");
+//        }
+//        while (Client.getPhase() == Phase.ACTIVATION){
+//            System.out.println("Act");
+//        }
+
+
+//        System.out.println("tempget: " + roboRally.tempget());
     }
-
-//    static class MultiPlayerLoop implements Callable<Integer>{
-//
-//        Board board;
-//
-//        public MultiPlayerLoop(Board board){
-//            this.board = board;
-//        }
-//        @Override
-//        public Integer call() throws Exception {
-//
-//            while(true){
-//                Client.getAllPlayers(board);
-//                board.setCurrentPlayer(board.getPlayer(Client.getCurrentPlayerIndex()));
-//                board.setPhase(Client.getPhase());
-//            }
-//        }
-//    }
-
-
-
 }

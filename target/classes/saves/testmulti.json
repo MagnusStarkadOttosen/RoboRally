@@ -18,19 +18,7 @@
       ],
       "cards": [
         {
-          "command": "SPEED_ROUTINE",
-          "observers": []
-        },
-        {
-          "command": "U_TURN",
-          "observers": []
-        },
-        {
-          "command": "OPTION_LEFT_RIGHT",
-          "observers": []
-        },
-        {
-          "command": "TROJAN_HORSE",
+          "command": "LEFT",
           "observers": []
         },
         {
@@ -38,15 +26,27 @@
           "observers": []
         },
         {
-          "command": "LEFT",
-          "observers": []
-        },
-        {
-          "command": "SPEED_ROUTINE",
+          "command": "WEASEL_ROUTINE",
           "observers": []
         },
         {
           "command": "FAST_FORWARD",
+          "observers": []
+        },
+        {
+          "command": "LEFT",
+          "observers": []
+        },
+        {
+          "command": "OPTION_LEFT_RIGHT",
+          "observers": []
+        },
+        {
+          "command": "U_TURN",
+          "observers": []
+        },
+        {
+          "command": "MOVE3_FORWARD",
           "observers": []
         }
       ],
@@ -67,23 +67,23 @@
       ],
       "cards": [
         {
-          "command": "TROJAN_HORSE",
+          "command": "SPEED_ROUTINE",
           "observers": []
         },
         {
-          "command": "Backwards",
+          "command": "SPAM_CARD",
           "observers": []
         },
         {
-          "command": "OPTION_LEFT_RIGHT",
+          "command": "SANDBOX_ROUTINE",
           "observers": []
         },
         {
-          "command": "TROJAN_HORSE",
+          "command": "SPAM_CARD",
           "observers": []
         },
         {
-          "command": "FORWARD",
+          "command": "SANDBOX_ROUTINE",
           "observers": []
         },
         {
@@ -91,11 +91,11 @@
           "observers": []
         },
         {
-          "command": "SPEED_ROUTINE",
+          "command": "MOVE3_FORWARD",
           "observers": []
         },
         {
-          "command": "FAST_FORWARD",
+          "command": "SPAM_CARD",
           "observers": []
         }
       ],
