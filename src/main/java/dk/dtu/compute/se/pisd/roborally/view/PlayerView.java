@@ -136,6 +136,16 @@ public class PlayerView extends Tab implements ViewObserver {
         }
     }
 
+    public void updateTemp(){
+        for (int i = 0; i < Player.NO_REGISTERS; i++) {
+            CommandCardField cardField = player.getProgramField(i);
+            if (cardField != null) {
+                programCardViews[i] = new CardFieldView(gameController, cardField);
+                programPane.add(programCardViews[i], i, 0);
+            }
+        }
+    }
+
     /**
      * Updates what is shown like buttons and fields.
      * @param subject
@@ -182,8 +192,18 @@ public class PlayerView extends Tab implements ViewObserver {
 
                     case PROGRAMMING:
                         finishButton.setDisable(false);
-                        executeButton.setDisable(true);
-                        stepButton.setDisable(true);
+//                        if(gameController.isGameIsMultiplayer()){
+//                            if(gameController.getPlayerNum() == 0){ //Only the host (player 0) can run the program.
+//                                executeButton.setDisable(true);
+//                                stepButton.setDisable(true);
+//                            }else{
+//                                executeButton.setDisable(false);
+//                                stepButton.setDisable(false);
+//                            }
+//                        }else{
+                            executeButton.setDisable(true);
+                            stepButton.setDisable(true);
+//                        }
                         break;
 
                     case ACTIVATION:

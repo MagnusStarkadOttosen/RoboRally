@@ -78,13 +78,15 @@ public class RoboRally extends Application {
         stage.show();
     }
 
+    private BoardView boardView;
+
     public void createBoardView(GameController gameController) {
         // if present, remove old BoardView
         boardRoot.getChildren().clear();
 
         if (gameController != null) {
             // create and add view for new board
-            BoardView boardView = new BoardView(gameController);
+            boardView = new BoardView(gameController);
             boardRoot.setCenter(boardView);
         }
 
@@ -105,4 +107,15 @@ public class RoboRally extends Application {
         launch(args);
     }
 
+    public void updateBoardView(){
+        boardView.updateBoard();
+    }
+
+    private int tempnum;
+    public void temp(int playerNum) {
+        tempnum = playerNum;
+    }
+    public int tempget(){
+        return tempnum;
+    }
 }

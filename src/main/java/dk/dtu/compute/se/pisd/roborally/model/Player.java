@@ -227,4 +227,22 @@ public class Player extends Subject {
         program[s].setCard(card);
     }
 
+    public void setCards(List<CommandCard> cards){
+
+        for (int i = 0; i < NO_CARDS; i++) {
+            this.cards[i].setCard(cards.get(i));
+        }
+
+
+//        System.out.println("cards: " + this.cards[0].getCard().getName());
+
+//        this.cards = (CommandCardField[]) cards.toArray();
+    }
+
+    public void setProgram(List<CommandCard> program){
+        for (int i = 0; i < NO_REGISTERS; i++) {
+            this.program[i].setCard(program.get(i));
+        }
+//        this.program = (CommandCardField[]) program.toArray();
+    }
 }

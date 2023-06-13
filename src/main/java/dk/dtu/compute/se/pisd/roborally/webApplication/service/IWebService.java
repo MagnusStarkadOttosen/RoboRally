@@ -2,6 +2,7 @@ package dk.dtu.compute.se.pisd.roborally.webApplication.service;
 
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.roborally.model.CommandCardField;
 import dk.dtu.compute.se.pisd.roborally.model.Phase;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import org.jetbrains.annotations.NotNull;
@@ -32,5 +33,15 @@ public interface IWebService {
 
     int getCurrentPlayerIndex();
 
-    boolean playersReady(int playerNum);
+    boolean playersReady(String programList);
+
+    void createGameController();
+
+    String findAllData();
+
+    boolean isProgFinished();
+
+    boolean isMovingFinished();
+
+    boolean updatePlayer(String player);
 }
