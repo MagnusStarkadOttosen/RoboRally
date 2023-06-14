@@ -67,7 +67,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         path = getClass().getResource("/image/img.png").toExternalForm();
         this.setStyle("-fx-background-image: url(/image/img.png),url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
-        // updatePlayer();
+//         updatePlayer();
 
         // This space view should listen to changes of the space
         space.attach(this);
@@ -79,21 +79,37 @@ public class SpaceView extends StackPane implements ViewObserver {
      */
     private void updatePlayer() {
         Player player = space.getPlayer();
-        if (player != null) {
-            Polygon arrow = new Polygon(0.0, 0.0,
-                    10.0, 20.0,
-                    20.0, 0.0 );
-            try {
-                arrow.setFill(Color.valueOf(player.getColor()));
-            } catch (Exception e) {
-                arrow.setFill(Color.MEDIUMPURPLE);
-            }
 
-            arrow.setRotate((90*player.getHeading().ordinal())%360);
-            this.getChildren().add(arrow);
+        if (player != null) {
+            String path = Objects.requireNonNull(this.getClass().getResource("/image/")).toString();
+            String image = path + player.getColor().toLowerCase() + "Robot.png";
+            String repeat = "no-repeat";
+            StackPane stackPane = new StackPane();
+
+            String playerColor = player.getColor();
+
+            switch (playerColor) {
+                case "red", "green","blue", "orange", "grey","magenta":
+                    stackPane.setStyle("-fx-background-image: url(" + image + "); -fx-background-size: " + SPACE_HEIGHT * 0.8 + "; -fx-background-repeat: " + repeat + ";");
+                    break;
+            }
+            this.getChildren().add(stackPane);
+
+//            Polygon arrow = new Polygon(0.0, 0.0,
+//                    10.0, 20.0,
+//                    20.0, 0.0 );
+//            try {
+//                arrow.setFill(Color.valueOf(player.getColor()));
+//            } catch (Exception e) {
+//                arrow.setFill(Color.MEDIUMPURPLE);
+//            }
+//
+//            arrow.setRotate((90*player.getHeading().ordinal())%360);
+//            this.getChildren().add(arrow);
+
+
         }
     }
-
     /**
      * Updates space with everything on it.
      * @param subject
