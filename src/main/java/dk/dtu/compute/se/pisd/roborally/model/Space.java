@@ -49,11 +49,6 @@ public class Space extends Subject {
 
     private List<Heading> walls;
 
-//    private Conveyor conveyor;
-
-//    private Gear gear;
-//    private Checkpoint checkpoint;
-
     private List<FieldAction> actions;
 
     public Space(Board board, int x, int y) {
@@ -62,9 +57,6 @@ public class Space extends Subject {
         this.y = y;
         player = null;
         walls = new ArrayList<>();
-//        conveyor = null;
-//        gear = null;
-//        checkpoint = null;
         actions = new ArrayList<>();
     }
 
@@ -121,57 +113,6 @@ public class Space extends Subject {
     public List<Heading> getWalls(){
         return walls;
     }
-
-    /**
-     * Adds a conveyor to the space.
-     * @param heading The direction the wall is blocking.
-     */
-    public void addConveyor(Heading heading){
-//        conveyor = new Conveyor(heading);
-        actions.add(new ConveyorBelt(heading));
-    }
-
-    /**
-     * Returns the space's conveyors. If any.
-     * @return conveyor
-     */
-//    public Conveyor getConveyor(){
-//        return conveyor;
-//    }
-
-    /**
-     * Adds a gear to the space.
-     * @param rotation The rotation the player is being turned.
-     */
-    public void addGear(Rotation rotation){
-//        gear = new Gear(rotation);
-        actions.add(new Gear(rotation));
-    }
-
-    /**
-     * Returns the space's gear. If any.
-     * @return conveyor
-     */
-//    public Gear getGear(){
-//        return gear;
-//    }
-
-    /**
-     * Adds a checkpoint with a number to the space.
-     * @param number
-     */
-    public void setCheckpoint(int number){
-//        checkpoint = new Checkpoint(number);
-        actions.add(new Checkpoint(number));
-    }
-
-    /**
-     *
-     * @return The checkpoint if any.
-     */
-//    public Checkpoint getCheckpoint(){
-//        return checkpoint;
-//    }
 
     /**
      *

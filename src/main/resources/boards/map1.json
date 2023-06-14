@@ -1,6 +1,7 @@
 {
   "width": 8,
   "height": 8,
+  "numOfCheckpoints": 2,
   "spaces": [
     {
       "walls": [

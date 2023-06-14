@@ -258,6 +258,9 @@ public class AppController implements Observer {
 
     IWebService webService;
 
+    /**
+     * Host starts the spring application
+     */
     public void host(){
         System.out.println("hosting");
 
@@ -266,13 +269,14 @@ public class AppController implements Observer {
         newMultiGame();
         SpringAPIApplication.startSpring();
 
-//        join();
-
         webService.testBoard();
     }
 
     private int playerNum;
 
+    /**
+     * Ask server if it is possible to join the server.
+     */
     public void join(){
         System.out.println("Joining");
 
@@ -284,6 +288,9 @@ public class AppController implements Observer {
         }
     }
 
+    /**
+     * Sets up the game on the server.
+     */
     public void newMultiGame(){
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
         dialog.setTitle("Player number");
@@ -311,73 +318,33 @@ public class AppController implements Observer {
             webService.addBoard(board);
             webService.createGameController();
 
-            System.out.println("Map set: " + Client.setMapName(mapResult.get()) + " with name: " + mapResult.get());
+            System.out.println("Map set with name: " + mapResult.get());
         }
     }
 
+    /**
+     * Joins the game on the server.
+     */
     public void gameJoined(){
-        System.out.println("gameJoined entered");
         board = LoadBoard.loadBoard(Client.getMapName());
-        System.out.println("map name: " + board.boardName);
+        System.out.println("Map name: " + board.boardName);
 
         Player player = new Player(board, PLAYER_COLORS.get(playerNum), "Player " + (playerNum+1));
         player.setSpace(board.getSpace(playerNum, playerNum));
         Client.addPlayer(player);
         System.out.println("Player created and send to server");
 
-//        Client.getAllPlayers(board);
-//        Client.getAllData(board);
-
-//        roboRally.temp(playerNum);
-
-
-//        System.out.println("All players from server added to board");
-//
-//        int temp = Client.getCurrentPlayerIndex();
-//        System.out.println("current player index " + temp);
-//        board.setCurrentPlayer(board.getPlayer(temp));
-//        System.out.println("Current player set");
-//
-//        board.setPhase(Client.getPhase());
-//        System.out.println("Phase set: " + Client.getPhase());
 
         gameController = new GameController(board);
         gameController.setGameIsMultiplayer(true);
         gameController.setPlayerNum(playerNum);
-        System.out.println("gameController created");
-
-//        MultiThreading multiThreading = new MultiThreading(board, playerNum, gameController, roboRally);
-//        Thread thread = new Thread(multiThreading);
-//        thread.start();
 
         while(Client.getPhase() == Phase.INITIALISATION){
-//            System.out.println("init");
         }
         System.out.println("all players in");
-
 
         Client.getAllData(board);
 
         roboRally.createBoardView(gameController);
-        System.out.println("Board view created");
-
-
-//        MultiThreading multiThreading = new MultiThreading(board, playerNum, gameController, roboRally);
-//        Thread thread = new Thread(multiThreading);
-//        thread.start();
-
-        //Dont work freezes system
-//        while (Client.getPhase() == Phase.PROGRAMMING){
-//            System.out.println("prog");
-//        }
-//        while (Client.getPhase() == Phase.WAITING){
-//            System.out.println("wait");
-//        }
-//        while (Client.getPhase() == Phase.ACTIVATION){
-//            System.out.println("Act");
-//        }
-
-
-//        System.out.println("tempget: " + roboRally.tempget());
     }
 }

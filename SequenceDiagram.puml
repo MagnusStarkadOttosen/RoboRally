@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant Client
+participant Host
+
+
+
+Client -> Host : permToJoin
+Client <-- Host : player number
+
+Client -> Host : get map name
+Client <-- Host : map name
+
+Client -> Host : add player
+
+loop phase != initialisation
+    Client -> Host : get phase
+    Client <-- Host : return phase
+end
+
+Client -> Host : get all data
+Client <-- Host : data
+
+
+group Repeat everytime a player clicks finished programming
+
+loop all players finished programming
+    Client -> Host : allPlayersFinishedProgramming
+    Client <-- Host : FinishStatus
+end
+
+Client -> Host : update all players
+Client <-- Host : return all players data
+
+Client -> Host : get phase
+Client <-- Host : return phase
+
+Client -> Host : get currentplayer index
+Client <-- Host : return index
+
+Client -> Host : update player
+
+loop all players finished moving
+    Client -> Host : allPlayersFinishedMoving
+    Client <-- Host : FinishStatus
+end
+
+Client -> Host : update all players
+Client <-- Host : return all players data
+
+end
+
+@enduml

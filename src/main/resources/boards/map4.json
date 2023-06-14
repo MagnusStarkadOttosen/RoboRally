@@ -1,6 +1,7 @@
 {
   "width": 8,
   "height": 8,
+  "numOfCheckpoints": 2,
   "spaces": [
     {
       "walls": [
@@ -182,7 +183,7 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.Checkpoint",
           "INSTANCE": {
-            "number": 3
+            "number": 1
           }
         }
       ],

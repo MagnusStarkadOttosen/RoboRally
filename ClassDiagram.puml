@@ -1,0 +1,148 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+
+package roborally{
+
+package controller{
+    class AppController
+    class CheckPoint
+    class ConveyorBelt
+    abstract class FieldAction
+    class GameController
+    class Gear
+    class MultiThreading
+
+    FieldAction<|--ConveyorBelt
+    FieldAction<|--Gear
+    FieldAction<|--CheckPoint
+
+    AppController --> GameController
+}
+
+
+
+package fileaccess{
+package filemodel{
+    class AllPlayersTemplate
+    class BoardTemplate
+    class PlayerTemplate
+    class ProgramTemplate
+    class SaveTemplate
+    class SpaceTemplate
+}
+    class Adapter
+    class IOUtil
+    class LoadBoard
+
+    LoadBoard -> Adapter
+
+    LoadBoard --> SaveTemplate
+    LoadBoard --> SpaceTemplate
+    LoadBoard --> PlayerTemplate
+    LoadBoard --> AllPlayersTemplate
+    LoadBoard --> BoardTemplate
+    LoadBoard --> ProgramTemplate
+}
+
+package model{
+    class Board
+    enum Command
+    class CommandCard
+    class CommandCardField
+    enum Heading
+    enum Rotation
+    class Player
+    class Space
+    enum Phase
+
+
+    Board-->Space
+    Board-->Player
+
+    Player --> CommandCardField
+
+    CommandCardField --> CommandCard
+
+
+}
+
+package view{
+    class BoardView
+    class CardFieldView
+    class PlayersView
+    class PlayerView
+    class RoboRallyMenuBar
+    class SpaceView
+    interface ViewObserver
+
+    CardFieldView <-- PlayerView
+    PlayerView <-- PlayersView
+    PlayersView <-- BoardView
+    SpaceView <-- BoardView
+
+    ViewObserver <|- BoardView
+    ViewObserver <|- CardFieldView
+    ViewObserver <|- PlayersView
+    ViewObserver <|- PlayerView
+    ViewObserver <|- SpaceView
+}
+
+package webApplication{
+
+package api{
+
+package webcontroller{
+    class WebController
+}
+
+package service{
+    interface IWebService
+    class WebService
+
+    IWebService <|-- WebService
+
+}
+
+    class Client
+    class SpringAPIApplication
+
+
+    WebController --> IWebService
+
+}
+
+}
+
+    class RoboRally
+    class StartRoboRally
+
+
+
+}
+
+
+StartRoboRally --> RoboRally
+
+RoboRally --> AppController
+RoboRally -> RoboRallyMenuBar
+RoboRally --> BoardView
+
+'RoboRallyMenuBar --> AppController
+
+AppController --> IWebService
+
+
+Client <- AppController
+Client <- MultiThreading
+
+MultiThreading <- AppController
+
+AppController --> SpringAPIApplication
+
+AppController --> Board
+
+AppController ---> LoadBoard
+
+@enduml

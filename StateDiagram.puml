@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/state-diagram
+
+scale 350 width
+[*] --> menu
+
+menu --> newgame
+menu --> loadgame
+menu --> host
+menu --> join
+
+
+state newgame {
+  [*] --> playerNum
+  playerNum --> map
+  map --> loadBoard
+  loadBoard --> loadPlayers
+
+  map : Player choices map
+  playerNum : Player inputs amount of players
+}
+
+state loadgame {
+    [*] --> loadSave
+
+    loadSave : Player choices save to load
+}
+
+state host {
+    [*] --> startServer
+}
+
+state join {
+    [*] --> joinGame
+}
+
+newgame --> Game
+join --> Game
+loadgame --> Game
+
+Game --> [*]
+
+
+}
+@enduml
