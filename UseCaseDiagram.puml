@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+package RoboRally{
+    usecase "New Game" as UC1
+    usecase "Load Game" as UC2
+    usecase "Save Game" as UC3
+    usecase "Exit Game" as UC4
+    usecase "Host" as UC5
+    usecase "Join" as UC6
+}
+
+Player --> UC1
+Player --> UC2
+Player --> UC3
+Player --> UC4
+Player --> UC5
+Player --> UC6
+
+
+@enduml

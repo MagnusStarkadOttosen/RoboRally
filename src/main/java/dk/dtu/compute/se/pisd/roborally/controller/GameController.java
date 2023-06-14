@@ -175,26 +175,6 @@ public class GameController {
      * Execute entire program.
      */
     public void executePrograms() {
-        System.out.println("executeProgram");
-        System.out.println("player 1: ");
-        for (CommandCardField c:board.getPlayer(0).getProgramList()) {
-            if(c.getCard() != null){
-                System.out.print(c.getCard().getName() + " ");
-            }else{
-                System.out.print("null ");
-            }
-        }
-        System.out.println();
-        System.out.println("player 2: ");
-        for (CommandCardField c:board.getPlayer(1).getProgramList()) {
-            if(c.getCard() != null){
-                System.out.print(c.getCard().getName() + " ");
-            }else{
-                System.out.print("null ");
-            }
-        }
-        System.out.println();
-
         board.setStepMode(false);
         continuePrograms();
     }
@@ -611,8 +591,7 @@ public class GameController {
 
     public void playerFinishedProgramming() {
         System.out.println("Player clicked finish");
-//        makeProgramFieldsInvisible();
-//        makeProgramFieldsVisible(0);
+
         board.setPhase(Phase.WAITING);
         board.setCurrentPlayer(board.getPlayer(0));
         board.setStep(0);
@@ -621,15 +600,6 @@ public class GameController {
 
         Client.playerFinishedProgramming(playerNum, board.getPlayer(playerNum).getProgramList());
         System.out.println("Data send to server");
-//        boolean temp = false;
-//        while(!temp){
-//            if(Client.allPlayersFinishedProgramming()){
-//                temp = true;
-//            }
-//        }
-//        System.out.println("waiting done   Phase is now: " + Client.getPhase());
-//
-//        Client.getAllData(board);
 
         waitThread();
 
@@ -643,15 +613,6 @@ public class GameController {
 
 
     public void winPopup(String name) {
-//        Popup popup = new Popup();
-//        Label label = new Label();
-//        label.setText("text1");
-//        label.setMinWidth(300);
-//        label.setMaxHeight(160);
-//        label.setStyle("-fx-background-color:#D5D5D5; -fx-font-size:25; -fx-font-weight:bold");
-//        label.setPadding(new Insets(20));
-//        popup.getContent().add(label);
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Win");
         alert.setHeaderText(name + " have won the game.");

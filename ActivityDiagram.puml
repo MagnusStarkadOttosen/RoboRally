@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:Join game;
+:Wait for all spots to be filled;
+:Start programming phase;
+:Player choices cards to play;
+:Wait to all players are done;
+:Change to Activition phase;
+:Move robots;
+
+stop
+
+@enduml

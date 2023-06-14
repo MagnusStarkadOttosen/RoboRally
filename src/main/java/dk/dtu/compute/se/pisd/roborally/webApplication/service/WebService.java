@@ -36,44 +36,35 @@ public class WebService implements IWebService{
         userList.addAll(Arrays.asList(user1,user2,user3,user4,user5));
     }
 
-    public Optional<testUser> getUser(Integer id) {
-        Optional optional = Optional.empty();
-        for (testUser user: userList) {
-            if(id == user.getId()){
-                optional = Optional.of(user);
-                return optional;
-            }
-        }
-        return optional;
-    }
-
-    public boolean setMapName(String name) {
-        temp = name;
-        return true;
-    }
+//    public Optional<testUser> getUser(Integer id) {
+//        Optional optional = Optional.empty();
+//        for (testUser user: userList) {
+//            if(id == user.getId()){
+//                optional = Optional.of(user);
+//                return optional;
+//            }
+//        }
+//        return optional;
+//    }
+//
+//    public boolean setMapName(String name) {
+//        temp = name;
+//        return true;
+//    }
 
     @Override
     public String getMapName(){
-//        System.out.println("test from webservice");
-//        System.out.println("test: " + this.board.boardName);
-
         return board.boardName;
     }
 
-    public boolean addPlayers(List<Player> playerList){
-        this.playerList = playerList;
-        return true;
-    }
+//    public boolean addPlayers(List<Player> playerList){
+//        this.playerList = playerList;
+//        return true;
+//    }
 
     public List<Player> getPlayers(){
         return playerList;
     }
-
-//    public boolean addPlayer(Player player){
-//        playerList.add(player);
-//        return true;
-//    }
-
 
     private static Board board;
 
@@ -104,7 +95,6 @@ public class WebService implements IWebService{
 
         Gson gson = new Gson();
         String temp = gson.toJson(template);
-//        System.out.println("temp: " + temp);
         return temp;
     }
 
@@ -130,7 +120,6 @@ public class WebService implements IWebService{
 
         Gson gson = new Gson();
         String temp = gson.toJson(playerTemplate);
-//        System.out.println("temp: " + temp);
         return temp;
     }
 
@@ -151,12 +140,6 @@ public class WebService implements IWebService{
 
     @Override
     public int getCurrentPlayerIndex() {
-//        System.out.println("getCurrentPlayerIndex");
-//        System.out.println("board size: " + board.getPlayers().size());
-
-
-
-
         return board.getPlayers().indexOf(board.getCurrentPlayer());
     }
 
@@ -166,15 +149,11 @@ public class WebService implements IWebService{
     @Override
     public boolean playersReady(String programList) {
 
-
-        System.out.println(programList);
-
         Gson gson = new Gson();
 
         ProgramTemplate template = gson.fromJson(programList, ProgramTemplate.class);
 
         int playerNum = template.playerNum;
-        System.out.println("player " + playerNum + " Clicked finished");
         readyPlayers[playerNum] = true;
 
         board.getPlayer(playerNum).setProgram(template.program);
@@ -186,7 +165,6 @@ public class WebService implements IWebService{
                 allPlayersReady = false;
             }
         }
-        System.out.println("allPlayersReady: " + allPlayersReady);
 
         if(allPlayersReady){
             Arrays.fill(readyPlayers, false);
@@ -231,7 +209,6 @@ public class WebService implements IWebService{
 
         Gson gson = new Gson();
         String temp = gson.toJson(template);
-//        System.out.println("temp: " + temp);
         return temp;
     }
 
@@ -250,7 +227,6 @@ public class WebService implements IWebService{
 
     public void addBoard(Board board){
         this.board = board;
-        System.out.println("after: " + this.board.boardName);
     }
 
     public void setMaxPlayers(int max){
@@ -262,17 +238,12 @@ public class WebService implements IWebService{
             readyPlayers[i] = false;
             playerFinishedMoving[i] = false;
         }
-
-        System.out.println("MaxPlayers set to: " + max);
     }
 
     public int permToJoin() {
-        System.out.println("1 Players: " + board.getPlayers().size() + " maxPlayer: " + maxPlayers);
         if(board.getPlayers().size()==maxPlayers){
-            System.out.println("2 Players: " + board.getPlayers().size() + " maxPlayer: " + maxPlayers);
             return -1;
         }
-        System.out.println("3 Players: " + board.getPlayers().size() + " maxPlayer: " + maxPlayers);
         return board.getPlayers().size();
     }
 
@@ -301,18 +272,13 @@ public class WebService implements IWebService{
             gameIsFull();
         }
 
-//        board.addPlayer(player);
-//        player.setSpace(board.getSpace(board.getPlayers().size() % board.width, 0));
+
         return true;
     }
 
     private void gameIsFull() {
         isProgFinished = false;
         gameController.startProgrammingPhase();
-
-
-//        board.setPhase(Phase.PROGRAMMING);
-
     }
 
     public boolean addPlayerDirect(Player player){
@@ -323,39 +289,10 @@ public class WebService implements IWebService{
 
     public void temp(@NotNull RoboRally roboRally){
         gameController = new GameController(board);
-//        System.out.println(board.getPlayer(0).getName());
-
-
-//        MultiThreading multiThreading = new MultiThreading();
-//        Thread myThread = new Thread(multiThreading);
-//        myThread.start();
-//
-////        while (board.getPlayers().size() != maxPlayers){
-//////            try {
-//////                wait(10000);
-//////            } catch (InterruptedException e) {
-//////                throw new RuntimeException(e);
-//////            }
-////            System.out.println("waiting on players: " + board.getPlayers().size() + "/" + maxPlayers);
-////        }
-
 
         gameController.startProgrammingPhase();
         roboRally.createBoardView(gameController);
     }
-    final private List<String> PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta");
-//    public void joinHost(){
-//
-//
-//
-//
-//        int playerNum = permToJoin();
-//        System.out.println(playerNum);
-//        if(playerNum != -1){
-//            Player player = new Player(board, PLAYER_COLORS.get(playerNum), "Player " + (playerNum+1));
-//            addPlayer(player);
-//        }
-//    }
 
     public void testBoard(){
         System.out.println("testing: " + board.boardName);
@@ -366,33 +303,7 @@ public class WebService implements IWebService{
         isProgFinished = true;
         isMovingFinished = false;
 
-        System.out.print("Player1 program: ");
-        for (CommandCardField commandCardField:board.getPlayer(0).getProgramList()) {
-            if(commandCardField.getCard() != null){
-                System.out.print(commandCardField.getCard().getName() + " ");
-            }else{
-                System.out.print("null ");
-            }
-        }
-        System.out.println();
-        System.out.print("Player2 program: ");
-        for (CommandCardField commandCardField:board.getPlayer(1).getProgramList()) {
-            if(commandCardField.getCard() != null){
-                System.out.print(commandCardField.getCard().getName() + " ");
-            }else{
-                System.out.print("null ");
-            }
-        }
-        System.out.println();
-
-
         gameController.finishProgrammingPhase();
-        System.out.println("all players are ready");
-        System.out.println("player 1 x: " + board.getPlayer(0).getSpace().x + " y: " + board.getPlayer(0).getSpace().y + " rotation: " + board.getPlayer(0).getHeading());
-        System.out.println("player 2 x: " + board.getPlayer(1).getSpace().x + " y: " + board.getPlayer(1).getSpace().y + " rotation: " + board.getPlayer(1).getHeading());
-
-//        gameController.executePrograms();
-
     }
 
 
@@ -409,12 +320,6 @@ public class WebService implements IWebService{
             for (Player player: board.getPlayers()) {
                 if(player.getName().equals(playerTemplate.playerName)){
                     playerFinishedMoving[board.getPlayers().indexOf(player)] = true;
-
-                    System.out.println("player: " + board.getPlayers().indexOf(player));
-
-                    for (boolean bool:playerFinishedMoving) {
-                        System.out.println(bool);
-                    }
 
                     player.setSpace(board.getSpace(playerTemplate.x, playerTemplate.y));
                     player.setHeading(playerTemplate.playerHeading);
@@ -436,9 +341,6 @@ public class WebService implements IWebService{
             isProgFinished = false;
             gameController.startProgrammingPhase();
         }
-        System.out.println("updatePlayer");
-        System.out.println("player 1 x: " + board.getPlayer(0).getSpace().x + " y: " + board.getPlayer(0).getSpace().y + " rotation: " + board.getPlayer(0).getHeading());
-        System.out.println("player 2 x: " + board.getPlayer(1).getSpace().x + " y: " + board.getPlayer(1).getSpace().y + " rotation: " + board.getPlayer(1).getHeading());
         return true;
     }
 }

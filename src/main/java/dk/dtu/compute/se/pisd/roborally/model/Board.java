@@ -311,14 +311,4 @@ public class Board extends Subject {
     public List<Player> getPlayers() {
         return players;
     }
-
-    public void addAllPlayers(List<Player> players){
-        this.players.addAll(players);
-        notifyChange();
-    }
-
-    public void removeAllPlayers() {
-        players.removeAll(players);
-    }
-
 }

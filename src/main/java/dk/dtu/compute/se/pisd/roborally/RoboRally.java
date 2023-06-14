@@ -107,10 +107,6 @@ public class RoboRally extends Application {
         launch(args);
     }
 
-    public void updateBoardView(){
-        boardView.updateBoard();
-    }
-
     private int tempnum;
     public void temp(int playerNum) {
         tempnum = playerNum;

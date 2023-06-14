@@ -109,10 +109,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     public void updateView(Subject subject) {
         if (subject == this.space) {
             this.getChildren().clear();
-//            drawConveyor();
             drawActionField();
-//            drawGear();
-//            drawCheckpoint();
             drawWalls();
             updatePlayer();
         }
@@ -138,71 +135,6 @@ public class SpaceView extends StackPane implements ViewObserver {
             this.getChildren().add(pane);
         }
     }
-
-    //TODO: Needs cleaning.
-    /**
-     * Draws the player icons.
-     */
-//    private void drawConveyor() {
-//        Conveyor conveyor = space.getConveyor();
-//        if (conveyor != null) {
-//            Polygon arrow = new Polygon(0.0, 0.0,
-//                    SPACE_WIDTH/2-3, SPACE_HEIGHT-5,
-//                    SPACE_HEIGHT-5, 0.0 );
-//            try {
-//                arrow.setFill(Color.LIGHTBLUE);
-//            } catch (Exception e) {
-//                arrow.setFill(Color.MEDIUMPURPLE);
-//            }
-//
-//            arrow.setRotate((90*conveyor.getHeading().ordinal())%360);
-//            this.getChildren().add(arrow);
-//        }
-//    }
-
-    /**
-     * Draws the gear icon.
-     */
-//    private void drawGear(){
-//        Gear gear = space.getGear();
-//        if (gear != null) {
-//            Circle circle = new Circle(SPACE_WIDTH/2-5);
-//            Text text = new Text();
-//            circle.setStrokeWidth(5);
-//            if(gear.getRotation() == Rotation.AntiClockwise){
-//                circle.setStroke(Color.GRAY);
-//                text.setText("Anti-\nClockwise");
-//            }else{
-//                circle.setStroke(Color.GREEN);
-//                text.setText("Clockwise");
-//            }
-//            text.setFont(Font.font(8));
-//            text.setStroke(Color.ORANGE);
-//
-//            this.getChildren().add(circle);
-//            this.getChildren().add(text);
-//        }
-//    }
-
-    /**
-     * Draws the checkpoint icon.
-     */
-//    private void drawCheckpoint(){
-//        Checkpoint checkpoint = space.getCheckpoint();
-//        if(checkpoint != null){
-//            Circle circle = new Circle(SPACE_WIDTH/2-5);
-//            Text text = new Text();
-//            circle.setStrokeWidth(5);
-//            circle.setStroke(Color.YELLOW);
-//            text.setText(String.valueOf(checkpoint.getNumber()));
-//
-//            text.setFont(Font.font(10));
-//            text.setStroke(Color.ORANGE);
-//
-//            this.getChildren().add(circle);
-//            this.getChildren().add(text);
-//        }
-//    }
 
     /**
      * Draws the action field on the space. Action field include conveyor, gear and checkpoints.

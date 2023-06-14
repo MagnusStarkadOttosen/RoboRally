@@ -1,0 +1,5 @@
+@startuml
+class dk.dtu.compute.se.pisd.roborally.StartRoboRally {
++ {static} void main(String[])
+}
+@enduml

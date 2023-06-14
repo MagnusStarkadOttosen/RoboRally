@@ -38,6 +38,8 @@ public class BoardTemplate {
     public int width;
     public int height;
 
+    public int numOfCheckpoints;
+
     public List<SpaceTemplate> spaces = new ArrayList<>();
 
     public List<PlayerTemplate> players = new ArrayList<>();

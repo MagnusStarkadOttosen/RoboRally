@@ -57,24 +57,19 @@ public class Client {
 
 
     public static String getMapName(){
-//        System.out.println("testing1");
         try{
-//            System.out.println("testing2");
             HttpRequest request = HttpRequest.newBuilder()
                     .GET()
                     .uri(URI.create("http://localhost:8080/map"))
                     .setHeader("User-Agent", "Product Client")
                     .header("Content-Type", "application/json")
                     .build();
-//            System.out.println("testing3");
             CompletableFuture<HttpResponse<String>> response =
                     httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
-//            System.out.println("testing4");
             String result = response.thenApply((r)->r.body()).get(5, TimeUnit.SECONDS);
-            System.out.println("testing5: " + result);
             return result;
         } catch (Exception e) {
-            System.out.println("fail1");
+            System.out.println("failed get map");
             return null;
         }
     }
@@ -99,9 +94,6 @@ public class Client {
 
     public static boolean addPlayer(Player p) {
         try{
-//            String productJSON = new Gson().toJson(p);
-//            System.out.println(productJSON);
-
             PlayerTemplate playerTemplate = new PlayerTemplate();
             Space space = p.getSpace();
             playerTemplate.x = space.x;
@@ -118,7 +110,7 @@ public class Client {
                 playerTemplate.program.add(card.getCard());
             }
             String productJSON = new Gson().toJson(playerTemplate);
-            System.out.println("temp: " + productJSON);
+            System.out.println("Player: " + productJSON);
 
             HttpRequest request = HttpRequest.newBuilder()
                     .POST(HttpRequest.BodyPublishers.ofString(productJSON))
@@ -164,7 +156,6 @@ public class Client {
                     httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
             String result = response.thenApply((r)->r.body()).get(5, TimeUnit.SECONDS);
 
-//            System.out.println("result getAllPlayers: " + result);
             Gson gson = new Gson();
 
             AllPlayersTemplate template = gson.fromJson(result, AllPlayersTemplate.class);
@@ -182,28 +173,9 @@ public class Client {
                             player.setProgram(playerTemplate.program);
                         }
                     }
-////                    Player player = new Player(board, playerTemplate.color, playerTemplate.playerName, playerTemplate.program, playerTemplate.cards);
-//                    player.setHeading(playerTemplate.playerHeading);
-//                    player.setCheckpoints(playerTemplate.checkpoints);
-////                    board.addPlayer(player);
-//                    space.setPlayer(player);
-//
-//
-////                    System.out.print("player name: " + player.getName() + " card name:");
-////                    for (CommandCard card : playerTemplate.cards) {
-////                        System.out.print(" " + card.getName());
-////                    }
-////                    System.out.println();
-//
-//                    player.setCards(playerTemplate.cards);
-//                    player.setProgram(playerTemplate.program);
                 }
             }
-
-//            List<Player> p = gson.fromJson(result, ArrayList.class);
-//            return p;
         } catch (Exception e) {
-//            return null;
         }
     }
 
@@ -222,18 +194,6 @@ public class Client {
             Gson gson = new Gson();
             Player p = gson.fromJson(result, Player.class);
             System.out.println("getname: " + p.getName());
-
-
-//            for (PlayerTemplate playerTemplate: template.players) {
-//                Space space = result.getSpace(playerTemplate.x, playerTemplate.y);
-//                if(space != null){
-//                    Player player = new Player(board, playerTemplate.color, playerTemplate.playerName, playerTemplate.program, playerTemplate.cards);
-//                    player.setHeading(playerTemplate.playerHeading);
-//                    player.setCheckpoints(playerTemplate.checkpoints);
-//                    board.addPlayer(player);
-//                    space.setPlayer(player);
-//                }
-//            }
 
             return p;
         } catch (Exception e) {
@@ -321,10 +281,6 @@ public class Client {
             template.program.add(card.getCard());
         }
 
-        String testtemp = temp.toJson(template);
-        System.out.println("programlist: " + testtemp);
-
-
         try{
             String productJSON = new Gson().toJson(template);
             HttpRequest request = HttpRequest.newBuilder()
@@ -354,7 +310,6 @@ public class Client {
                     httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
             String result = response.thenApply((r)->r.body()).get(5, TimeUnit.SECONDS);
 
-//            System.out.println("result getAllPlayers: " + result);
             Gson gson = new Gson();
 
             SaveTemplate template = gson.fromJson(result, SaveTemplate.class);
@@ -368,13 +323,6 @@ public class Client {
                     board.addPlayer(player);
                     space.setPlayer(player);
 
-
-//                    System.out.print("player name: " + player.getName() + " card name:");
-//                    for (CommandCard card : playerTemplate.cards) {
-//                        System.out.print(" " + card.getName());
-//                    }
-//                    System.out.println();
-
                     player.setCards(playerTemplate.cards);
                     player.setProgram(playerTemplate.program);
                 }
@@ -384,20 +332,7 @@ public class Client {
             board.setPhase(template.phase);
             board.setStep(template.step);
 
-            System.out.println();
-            System.out.println("GetAllData");
-            System.out.println("phase: " + board.getPhase());
-            System.out.println("step: " + board.getStep());
-            System.out.println("player 1 x: " + board.getPlayer(0).getSpace().x + " y: " + board.getPlayer(0).getSpace().y + " rotation: " + board.getPlayer(0).getHeading());
-            System.out.println("player 2 x: " + board.getPlayer(1).getSpace().x + " y: " + board.getPlayer(1).getSpace().y + " rotation: " + board.getPlayer(1).getHeading());
-            System.out.println("GetAllData end");
-            System.out.println();
-
-
-//            List<Player> p = gson.fromJson(result, ArrayList.class);
-//            return p;
         } catch (Exception e) {
-//            return null;
         }
     }
 
@@ -421,8 +356,6 @@ public class Client {
     }
 
     public static boolean updatePlayers(Player p) {
-
-
         try{
             PlayerTemplate playerTemplate = new PlayerTemplate();
             Space space = p.getSpace();
@@ -440,7 +373,6 @@ public class Client {
                 playerTemplate.program.add(card.getCard());
             }
             String productJSON = new Gson().toJson(playerTemplate);
-            System.out.println("temp: " + productJSON);
 
             HttpRequest request = HttpRequest.newBuilder()
                     .POST(HttpRequest.BodyPublishers.ofString(productJSON))
