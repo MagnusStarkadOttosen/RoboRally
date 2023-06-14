@@ -1,0 +1,19 @@
+
+l
+java:S1104"VMake playerName a static final constant or non-public and provide accessors if needed.(ÍµğÁ
+l
+java:S1104"QMake color a static final constant or non-public and provide accessors if needed.(æ®şôûÿÿÿÿ
+t
+java:S1104"YMake playerHeading a static final constant or non-public and provide accessors if needed.(¯ÁÕãÿÿÿÿÿ
+r
+java:S1104"WMake checkpoints a static final constant or non-public and provide accessors if needed.(ëšªúÿÿÿÿ
+i
+java:S1104"SMake program a static final constant or non-public and provide accessors if needed.(œóí’
+g
+java:S1104"QMake cards a static final constant or non-public and provide accessors if needed.(ÿ¨³¦
+h
+java:S1104"MMake x a static final constant or non-public and provide accessors if needed.(±Šõ¶ûÿÿÿÿ
+h
+java:S1104"MMake y a static final constant or non-public and provide accessors if needed.(ÔçÛşÿÿÿÿ
+o
+java:S1128"TRemove this unused import 'dk.dtu.compute.se.pisd.roborally.controller.FieldAction'.(®Á³ÿÿÿÿÿ

@@ -1,0 +1,13 @@
+
+i
+java:S1104"SMake mapName a static final constant or non-public and provide accessors if needed.(”ä¯•
+l
+java:S1104"QMake phase a static final constant or non-public and provide accessors if needed.(Í…Í¨ıÿÿÿÿ
+k
+java:S1104"PMake step a static final constant or non-public and provide accessors if needed.(öçéÿÿÿÿÿ
+t
+java:S1104"YMake currentPlayer a static final constant or non-public and provide accessors if needed.(ÕåÙ÷ÿÿÿÿÿ
+i
+java:S1104"SMake players a static final constant or non-public and provide accessors if needed.(áÌ÷‰
+`
+java:S1128"JRemove this unused import 'dk.dtu.compute.se.pisd.roborally.model.Player'.( §ùà

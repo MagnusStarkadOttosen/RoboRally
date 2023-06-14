@@ -59,12 +59,9 @@ public class SpaceView extends StackPane implements ViewObserver {
     public SpaceView(@NotNull Space space) {
         this.space = space;
         String path;
-
-        // XXX the following styling should better be done with styles
         this.setPrefWidth(SPACE_WIDTH);
         this.setMinWidth(SPACE_WIDTH);
         this.setMaxWidth(SPACE_WIDTH);
-
         this.setPrefHeight(SPACE_HEIGHT);
         this.setMinHeight(SPACE_HEIGHT);
         this.setMaxHeight(SPACE_HEIGHT);
@@ -98,7 +95,7 @@ public class SpaceView extends StackPane implements ViewObserver {
                     break;
             }
             this.getChildren().add(stackPane);
-
+// old style for players
 //            Polygon arrow = new Polygon(0.0, 0.0,
 //                    10.0, 20.0,
 //                    20.0, 0.0 );
@@ -148,7 +145,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
             this.setStyle("-fx-background-image:  url(/image/img.png),url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
-
+//old style walls
 //            Pane pane = new Pane();
 //            Line line;
 //            switch(wall){
@@ -163,71 +160,6 @@ public class SpaceView extends StackPane implements ViewObserver {
 //            this.getChildren().add(pane);
         }
     }
-
-    //TODO: Needs cleaning.
-    /**
-     * Draws the player icons.
-     */
-//    private void drawConveyor() {
-//        Conveyor conveyor = space.getConveyor();
-//        if (conveyor != null) {
-//            Polygon arrow = new Polygon(0.0, 0.0,
-//                    SPACE_WIDTH/2-3, SPACE_HEIGHT-5,
-//                    SPACE_HEIGHT-5, 0.0 );
-//            try {
-//                arrow.setFill(Color.LIGHTBLUE);
-//            } catch (Exception e) {
-//                arrow.setFill(Color.MEDIUMPURPLE);
-//            }
-//
-//            arrow.setRotate((90*conveyor.getHeading().ordinal())%360);
-//            this.getChildren().add(arrow);
-//        }
-//    }
-
-    /**
-     * Draws the gear icon.
-     */
-//    private void drawGear(){
-//        Gear gear = space.getGear();
-//        if (gear != null) {
-//            Circle circle = new Circle(SPACE_WIDTH/2-5);
-//            Text text = new Text();
-//            circle.setStrokeWidth(5);
-//            if(gear.getRotation() == Rotation.AntiClockwise){
-//                circle.setStroke(Color.GRAY);
-//                text.setText("Anti-\nClockwise");
-//            }else{
-//                circle.setStroke(Color.GREEN);
-//                text.setText("Clockwise");
-//            }
-//            text.setFont(Font.font(8));
-//            text.setStroke(Color.ORANGE);
-//
-//            this.getChildren().add(circle);
-//            this.getChildren().add(text);
-//        }
-//    }
-
-    /**
-     * Draws the checkpoint icon.
-     */
-//    private void drawCheckpoint(){
-//        Checkpoint checkpoint = space.getCheckpoint();
-//        if(checkpoint != null){
-//            Circle circle = new Circle(SPACE_WIDTH/2-5);
-//            Text text = new Text();
-//            circle.setStrokeWidth(5);
-//            circle.setStroke(Color.YELLOW);
-//            text.setText(String.valueOf(checkpoint.getNumber()));
-//
-//            text.setFont(Font.font(10));
-//            text.setStroke(Color.ORANGE);
-//
-//            this.getChildren().add(circle);
-//            this.getChildren().add(text);
-//        }
-//    }
 
     /**
      * Draws the action field on the space. Action field include conveyor, gear and checkpoints.
@@ -272,10 +204,10 @@ public class SpaceView extends StackPane implements ViewObserver {
 
             }
 
-
+// checkpoints
             if (action.getClass() == Checkpoint.class) {
                 int number = Checkpoint.getNumber(); // Access static member using class reference
-                String path = "";
+                String path;
 
                 switch (number) {
                     case 1:
@@ -295,12 +227,13 @@ public class SpaceView extends StackPane implements ViewObserver {
                         path = Objects.requireNonNull(this.getClass().getResource("/image/Check1.png")).toExternalForm();
                         break;
                 }
+                this.setStyle("-fx-background-image: url(/image/img.png),url(" + path+ "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
-                this.setStyle("-fx-background-image: url(/image/img.png),url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: " + SpaceView.SPACE_HEIGHT + "; -fx-background-position:center center;");
             }
 
 
 
+// here the old code of the checkpoints
 //            if(action.getClass() == Checkpoint.class){
 //                Circle circle = new Circle((double) SPACE_WIDTH /2-5);
 //                Text text = new Text();

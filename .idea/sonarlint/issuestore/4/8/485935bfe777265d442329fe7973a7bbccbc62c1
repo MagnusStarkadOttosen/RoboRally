@@ -3,10 +3,10 @@ E
 java:S1066L"/Merge this if statement with the enclosing one.(œßÎÎ
 h
 java:S3655¨"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(Çâ»ìúÿÿÿÿ
-m
-java:S3655X"RCall "mapResult.isPresent()" or "!mapResult.isEmpty()" before accessing the value.(Œ›ê©úÿÿÿÿ
 c
 java:S3655Ž"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(óÈºÓ
+m
+java:S3655X"RCall "mapResult.isPresent()" or "!mapResult.isEmpty()" before accessing the value.(Œ›ê©úÿÿÿÿ
 u	java:S1162"`Rename this field "PLAYER_NUMBER_OPTIONS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ú·¥¯
 l	java:S1163"XRename this field "PLAYER_COLORS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(›—ë@
 [
