@@ -32,11 +32,15 @@ import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
+
 //TODO: the current icons should be changed to images
 /**
  * What is drawn on each space.
@@ -264,32 +268,45 @@ public class SpaceView extends StackPane implements ViewObserver {
                     path = getClass().getResource("/image/clockwise.png").toExternalForm();
                     this.setStyle("-fx-background-image: url(/image/img.png),url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
-
-//                    circle.setStroke(Color.GREEN);
-//                    text.setText("Clockwise");
                 }
-//                text.setFont(Font.font(8));
-//                text.setStroke(Color.ORANGE);
-//
-//                this.getChildren().add(this);
-//                this.getChildren().add(text);
+
             }
-            if(action.getClass() == Checkpoint.class){
-                // have to be fixed
-                int number = Checkpoint.getNumber();
-                String path = Objects.requireNonNull(this.getClass().getResource("/image/Check1.png")).toExternalForm();
-                switch(number){
-                    case 1 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check2.png")).toExternalForm();
-                    case 2 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check3.png")).toExternalForm();
-                    case 3 -> path = Objects.requireNonNull(this.getClass().getResource("/image/Check4.png")).toExternalForm();
-                }
-                this.setStyle("-fx-background-image: url(/image/img.png),url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
 
-//                Circle circle = new Circle(SPACE_WIDTH/2-5);
+
+            if (action.getClass() == Checkpoint.class) {
+                int number = Checkpoint.getNumber(); // Access static member using class reference
+                String path = "";
+
+                switch (number) {
+                    case 1:
+                        path = Objects.requireNonNull(this.getClass().getResource("/image/Check2.png")).toExternalForm();
+                        break;
+                    case 2:
+                        path = Objects.requireNonNull(this.getClass().getResource("/image/Check3.png")).toExternalForm();
+                        break;
+                    case 3:
+                        path = Objects.requireNonNull(this.getClass().getResource("/image/Check4.png")).toExternalForm();
+                        break;
+                    case 4:
+                        path = Objects.requireNonNull(this.getClass().getResource("/image/Check5.png")).toExternalForm();
+                        break;
+                    default:
+                        // Handle other cases
+                        path = Objects.requireNonNull(this.getClass().getResource("/image/Check1.png")).toExternalForm();
+                        break;
+                }
+
+                this.setStyle("-fx-background-image: url(/image/img.png),url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: " + SpaceView.SPACE_HEIGHT + "; -fx-background-position:center center;");
+            }
+
+
+
+//            if(action.getClass() == Checkpoint.class){
+//                Circle circle = new Circle((double) SPACE_WIDTH /2-5);
 //                Text text = new Text();
 //                circle.setStrokeWidth(5);
 //                circle.setStroke(Color.YELLOW);
-//                text.setText(String.valueOf(((Checkpoint) action).getNumber()));
+//                text.setText(String.valueOf(Checkpoint.getNumber()));
 //
 //                text.setFont(Font.font(10));
 //                text.setStroke(Color.ORANGE);
@@ -299,4 +316,4 @@ public class SpaceView extends StackPane implements ViewObserver {
             }
         }
     }
-}
+

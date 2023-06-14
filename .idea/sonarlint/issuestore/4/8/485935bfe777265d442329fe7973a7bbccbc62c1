@@ -1,0 +1,32 @@
+
+E
+java:S1066L"/Merge this if statement with the enclosing one.(œßÎÎ
+h
+java:S3655¨"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(Çâ»ìúÿÿÿÿ
+m
+java:S3655X"RCall "mapResult.isPresent()" or "!mapResult.isEmpty()" before accessing the value.(Œ›ê©úÿÿÿÿ
+c
+java:S3655Ž"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(óÈºÓ
+u	java:S1162"`Rename this field "PLAYER_NUMBER_OPTIONS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ú·¥¯
+l	java:S1163"XRename this field "PLAYER_COLORS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(›—ë@
+[
+java:S11242"EReorder the modifiers to comply with the Java Language Specification.(ú·¥¯
+Z
+java:S11243"EReorder the modifiers to comply with the Java Language Specification.(›—ë@
+`
+java:S11245"EReorder the modifiers to comply with the Java Language Specification.(á£ÊÃÿÿÿÿÿ
+Q	java:S125V"<This block of commented-out lines of code should be removed.(þÃÚ²
+V	java:S125]"<This block of commented-out lines of code should be removed.(Á³èÿÿÿÿÿ
+Q	java:S125f"<This block of commented-out lines of code should be removed.(Û¦ûÎ
+P	java:S125z"<This block of commented-out lines of code should be removed.(ÅÁ‚8
+I
+java:S1135"2Complete the task associated to this TODO comment.(±†û¿
+N
+java:S1135’"2Complete the task associated to this TODO comment.(îÑŒ¹þÿÿÿÿ
+R	java:S125š"<This block of commented-out lines of code should be removed.(ÐÁýÎ
+R	java:S125"<This block of commented-out lines of code should be removed.(à…ð
+W	java:S125®"<This block of commented-out lines of code should be removed.(ŽÞ©…þÿÿÿÿ
+W	java:S125µ"<This block of commented-out lines of code should be removed.(™¬ý¥ûÿÿÿÿ
+I
+java:S1135¾"2Complete the task associated to this TODO comment.(ì¼Èø
+W	java:S125Ì"<This block of commented-out lines of code should be removed.(Âî÷¥úÿÿÿÿ

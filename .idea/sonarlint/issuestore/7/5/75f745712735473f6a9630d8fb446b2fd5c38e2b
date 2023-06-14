@@ -1,0 +1,12 @@
+
+Q	java:S110+"<This class has 6 parents which is greater than 5 authorized.(òîÃ»
+E
+java:S1481\"*Remove this unused "phase" local variable.(öåİ™ùÿÿÿÿ
+`
+java:S1124h"EReorder the modifiers to comply with the Java Language Specification.(Ó¿•Ñıÿÿÿÿ
+b
+java:S6201q"LReplace this instanceof check and cast with 'instanceof SpaceView spaceView'(¾Ûï—
+T
+java:S1117t"9Rename "board" which hides the field declared at line 45.(Ú«¸ˆúÿÿÿÿ
+`
+java:S1128"JRemove this unused import 'dk.dtu.compute.se.pisd.roborally.model.Player'.( §ùà

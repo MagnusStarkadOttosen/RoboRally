@@ -1,0 +1,57 @@
+
+R
+java:S1066’"/Merge this if statement with the enclosing one.(—¼µøÿÿÿÿ8Ší¨Á‹1
+M
+java:S1066Ú"/Merge this if statement with the enclosing one.(¤ÉÌû8Ší¨Á‹1
+R
+java:S1066ó"/Merge this if statement with the enclosing one.(òçì†ıÿÿÿÿ8Ší¨Á‹1
+R
+java:S1066"/Merge this if statement with the enclosing one.(òçì†ıÿÿÿÿ8Ší¨Á‹1
+R
+java:S1066ª"/Merge this if statement with the enclosing one.(òçì†ıÿÿÿÿ8Ší¨Á‹1
+]	java:S110/"<This class has 6 parents which is greater than 5 authorized.(ôÃ½Àùÿÿÿÿ8Ší¨Á‹1
+b
+java:S11243"EReorder the modifiers to comply with the Java Language Specification.(çòş¸8£í¨Á‹1
+b
+java:S11245"EReorder the modifiers to comply with the Java Language Specification.(À¤¡§8¦í¨Á‹1
+g
+java:S11246"EReorder the modifiers to comply with the Java Language Specification.(ÅØëıÿÿÿÿ8¨í¨Á‹1
+g
+java:S11248"EReorder the modifiers to comply with the Java Language Specification.(¥ğ€µÿÿÿÿÿ8ªí¨Á‹1
+b
+java:S1124:"EReorder the modifiers to comply with the Java Language Specification.(¦•ç8­í¨Á‹1
+g
+java:S1124<"EReorder the modifiers to comply with the Java Language Specification.(˜“ñúÿÿÿÿ8¯í¨Á‹1
+b
+java:S1124="EReorder the modifiers to comply with the Java Language Specification.(ıÚêÓ8¯í¨Á‹1
+a
+java:S1124?"EReorder the modifiers to comply with the Java Language Specification.(¹õÄ
+8¯í¨Á‹1
+b
+java:S1124@"EReorder the modifiers to comply with the Java Language Specification.(¥ş¶±8¯í¨Á‹1
+o
+java:S3776ˆ"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(£æP8²í¨Á‹1
+p
+java:S6201³"MReplace this instanceof check and cast with 'instanceof CardFieldView source'(êëıˆûÿÿÿÿ8µí¨Á‹1
+p
+java:S6201Ó"MReplace this instanceof check and cast with 'instanceof CardFieldView target'(êëıˆûÿÿÿÿ8¶í¨Á‹1
+p
+java:S6201ì"MReplace this instanceof check and cast with 'instanceof CardFieldView target'(êëıˆûÿÿÿÿ8¼í¨Á‹1
+p
+java:S6201†"MReplace this instanceof check and cast with 'instanceof CardFieldView target'(êëıˆûÿÿÿÿ8Áí¨Á‹1
+p
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(¯šºù8Âí¨Á‹1
+p
+java:S6201 "MReplace this instanceof check and cast with 'instanceof CardFieldView target'(êëıˆûÿÿÿÿ8Âí¨Á‹1
+i
+java:S6201­"FReplace this instanceof check and cast with 'instanceof String string'(á„€şÿÿÿÿ8Ãí¨Á‹1
+^	java:S125°"<This block of commented-out lines of code should be removed.(ú¢°Íùÿÿÿÿ8Ãí¨Á‹1
+^	java:S125µ"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8Ãí¨Á‹1
+p
+java:S6201Ê"MReplace this instanceof check and cast with 'instanceof CardFieldView source'(êëıˆûÿÿÿÿ8Äí¨Á‹1
+O
+java:S1128'"-Remove this unused import 'org.w3c.dom.Text'.(¶Äè‹şÿÿÿÿ8Äí¨Á‹1
+K
+java:S3398n".Move this method into "OnDragDetectedHandler".(åÔíÉ8Äí¨Á‹1
+J
+java:S3398ˆ"-Move this method into "OnDragDroppedHandler".(£æP8Äí¨Á‹1

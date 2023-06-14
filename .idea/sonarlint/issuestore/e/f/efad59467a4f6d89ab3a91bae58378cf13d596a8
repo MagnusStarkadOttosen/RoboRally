@@ -1,0 +1,38 @@
+
+
+java:S1192H"{Define a constant instead of duplicating this literal "); -fx-background-repeat: no-repeat; -fx-background-size: " 5 times.(õû®°şÿÿÿÿ8¡Ó‘Â‹1
+‹
+java:S1192H"iDefine a constant instead of duplicating this literal "; -fx-background-position:center center;" 5 times.(õû®°şÿÿÿÿ8¡Ó‘Â‹1
+‘
+java:S1192H"oDefine a constant instead of duplicating this literal "-fx-background-image: url(/image/img.png),url(" 4 times.(õû®°şÿÿÿÿ8¡Ó‘Â‹1
+m
+java:S1301_"KReplace this "switch" statement by "if" statements to increase readability.(±ŠØåúÿÿÿÿ8¡Ó‘Â‹1
+X	java:S1103"<This class has 6 parents which is greater than 5 authorized.(˜İúÙ8¡Ó‘Â‹1
+T
+java:S1135,"2Complete the task associated to this TODO comment.(éùª°úÿÿÿÿ8ƒÔ‘Â‹1
+g
+java:S11245"EReorder the modifiers to comply with the Java Language Specification.(ËØĞ»ùÿÿÿÿ8…Ô‘Â‹1
+b
+java:S11246"EReorder the modifiers to comply with the Java Language Specification.(Êñ» 8…Ô‘Â‹1
+]	java:S125J"<This block of commented-out lines of code should be removed.(²À¡æøÿÿÿÿ8†Ô‘Â‹1
+C	java:S131_""Add a default case to this switch.(±ŠØåúÿÿÿÿ8ˆÔ‘Â‹1
+]	java:S125h"<This block of commented-out lines of code should be removed.(óÜ›øÿÿÿÿ8ˆÔ‘Â‹1
+]	java:S125}"<This block of commented-out lines of code should be removed.(İ¤ËÔüÿÿÿÿ8‰Ô‘Â‹1
+X	java:S125"<This block of commented-out lines of code should be removed.(Â±–ø8‰Ô‘Â‹1
+Y	java:S125˜"<This block of commented-out lines of code should be removed.(Ş‘ÇĞ8‹Ô‘Â‹1
+p
+java:S3776ë"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(¯ûª‚8Š´’Â‹1
+^	java:S125«"<This block of commented-out lines of code should be removed.(¤Ÿ±÷øÿÿÿÿ8ŒÔ‘Â‹1
+Y	java:S125¿"<This block of commented-out lines of code should be removed.(éâø«8ŒÔ‘Â‹1
+Y	java:S125×"<This block of commented-out lines of code should be removed.(ôÁ¼·8ŒÔ‘Â‹1
+P
+java:S1135§"2Complete the task associated to this TODO comment.(šñÀñ8ŒÔ‘Â‹1
+Y	java:S125"<This block of commented-out lines of code should be removed.(ŞÕ¬È8Ô‘Â‹1
+^	java:S125†"<This block of commented-out lines of code should be removed.(ÏÇ½İüÿÿÿÿ8Ô‘Â‹1
+^	java:S125°"<This block of commented-out lines of code should be removed.(ˆ†€ùÿÿÿÿ8Ô‘Â‹1
+S
+java:S1128#"6Remove this unused import 'javafx.scene.shape.Circle'.(ÃÁò«8Ô‘Â‹1
+P
+java:S1128%"3Remove this unused import 'javafx.scene.text.Font'.(¾¼¡Ê8Ô‘Â‹1
+U
+java:S1128&"3Remove this unused import 'javafx.scene.text.Text'.(˜ÿ‡Üşÿÿÿÿ8Ô‘Â‹1
